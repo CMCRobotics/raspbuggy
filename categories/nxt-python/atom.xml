@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title><![CDATA[Raspbuggy]]></title><link href="http://cmcrobotics.github.io/raspbuggy/categories/nxt-python/atom.xml" rel="self"/><link href="http://cmcrobotics.github.io/raspbuggy/"/><updated>2015-04-02T15:50:37+02:00</updated><id>http://cmcrobotics.github.io/raspbuggy/</id><author><name><![CDATA[CERN Micro Club Robotics]]></name><email><![CDATA[cmc.robotics@cern.ch]]></email></author><generator uri="http://sysgears.com/grain/">Grain</generator><entry><title type="html"><![CDATA[A Lego Mindstorm hardware layer]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/18/a-lego-mindstorm-hardware-layer/"/><updated>2015-05-03T20:45:04+02:00</updated><id>/blog/2015/04/18/a-lego-mindstorm-hardware-layer/</id><content type="html"><![CDATA[<p>The Raspbuggy platform is destined to be an open educational programming platform. It is designed to adapt to a
+large array of hardware layers, so that it can evolve through time.</p>
+<p>In order to cope with different hardware platforms, it relies on a hardware abstraction layer called "Drivar".</p>
+<!--more-->
+<p>Drivar is (currently) a Python library that provides a simple and stable API to give access to :</p>
+<ul>
+<li>Controlling the activity of the car motors (direction of the rotation, speed).</li>
+<li>Obtaining reading from sensors (proximity ultrasonic sensors for instance).</li>
+<li>Acquiring and processing images and videos for image recognition.</li>
+</ul>
+<p>Today, I have started writing the "Drivar NXT" classes, that allow the Raspbuggy to run on top of Lego Mindstorm NXT kit.</p>
+<p>NXT kits are quite easy to drive from Python via USB thanks to the excellent NXT-Python library.</p>
+<p>In order to organise our next Robotics challenge and introduce the Raspbuggy platform at CERN, we will use four NXT kits
+that will provide an ideal development target for our contestants.</p>
+<p>Stay tuned...</p>
+]]></content></entry></feed>

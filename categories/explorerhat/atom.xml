@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title><![CDATA[Raspbuggy]]></title><link href="http://cmcrobotics.github.io/raspbuggy/categories/explorerhat/atom.xml" rel="self"/><link href="http://cmcrobotics.github.io/raspbuggy/"/><updated>2015-04-02T15:50:37+02:00</updated><id>http://cmcrobotics.github.io/raspbuggy/</id><author><name><![CDATA[CERN Micro Club Robotics]]></name><email><![CDATA[cmc.robotics@cern.ch]]></email></author><generator uri="http://sysgears.com/grain/">Grain</generator><entry><title type="html"><![CDATA[Powering issues]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/05/01/powering-issues/"/><updated>2015-05-03T20:40:52+02:00</updated><id>/blog/2015/05/01/powering-issues/</id><content type="html"><![CDATA[<p>With all the existing options on the market to control DC motors, collect inputs,
+drive outputs, power the whole thing in a standard 5 volts, you would think to controlling a 4WD model car chassis is a no-brainer.
+Well, I must be missing something.</p>
+<!--more-->
+<p><img src="/raspbuggy/images/2015-04-18-raspbuggy-explorer-9963559fd7217c27c86cd4009e6cdcc2.jpg"></p>
+<p>Here's what we have so far :</p>
+<ul>
+<li>A 4 wheel drive car chassis, with 4 DC motors that require around 250 mA each.</li>
+<li>A Raspberry Pi B+, requiring a stable 5V 700 mA.</li>
+<li>A dual-USB output battery packing 6600 mAh and a dual 2 A / 1 A power outlet.</li>
+</ul>
+<p>... But no convenient way to connect it all.</p>
+<p>The Pimoroni Pibrella, although adequately powered independently and able to drive the four motors, can only do so in a single direction (no H-Bridge).
+The Pimoroni Explorer Pro (picture above) can certainly power four motors, but only going in the same direction - trying to reverse direction on one set of wheels (essential to change direction with precision) will not work.
+We could certainly go ahead with a simpler chassis and only two motors (using a freely moving wheel at the front), which is what the Explorer Pro HAT is really designed for.
+But we would lose a lot of precision in the movement, as well as the capacity to evolve on difficult terrain.</p>
+<p>Ideally, a simple board that would exhibit :</p>
+<ul>
+<li>Two H-Bridge outputs, powered separately from the Raspberry Pi and capable of driving 2 motors each (2 x 250 mA).</li>
+<li>A ground, 3.3V and 5V individually powered slots.</li>
+<li>Two digital 5V outputs.</li>
+<li>Two digital protected 5V inputs.</li>
+</ul>
+<p>... would be enough to drive the four motors, collect input from two ultrasonic sensors and power a small LED array or an LCD screen.</p>
+<p>Any takers ?</p>
+]]></content></entry></feed>

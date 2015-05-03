@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>We're online - Raspbuggy</title>
+  <title>A Lego Mindstorm hardware layer - Raspbuggy</title>
   <meta name="author" content="CERN Micro Club Robotics">
   
   
@@ -14,7 +14,7 @@
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="canonical" href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/02/we-re-online/">
+  <link rel="canonical" href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/18/a-lego-mindstorm-hardware-layer/">
   <link href="/raspbuggy/images/favicon-a31051b4c277b2e618d0703b45ab2dba.png" rel="icon">
   <link href="/raspbuggy/stylesheets/screen-cd0a4e87cdbbbddb86ccd18ee87366e1.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="atom.xml" rel="alternate" title="Raspbuggy" type="application/atom+xml">
@@ -80,16 +80,16 @@
 
   <header>
     
-      <h1 class="entry-title">We're Online</h1>
+      <h1 class="entry-title">A Lego Mindstorm Hardware Layer</h1>
     
     
       <p class="meta">
         
 
 
-    <time datetime="2015-04-02T16:04:00+02:00" pubdate data-updated=true>
+    <time datetime="2015-04-18T20:28:00+02:00" pubdate data-updated=true>
       <span class="month">Apr</span>
-      <span class="day">02</span>,
+      <span class="day">18</span>,
       <span class="year">2015</span>
     </time>
   
@@ -101,17 +101,21 @@
   </header>
 
 
-<div class="entry-content"><p>We are online, using a Grain-powered website, a Twitter feed, an RSS feed and a new logo !</p>
+<div class="entry-content"><p>The Raspbuggy platform is destined to be an open educational programming platform. It is designed to adapt to a
+large array of hardware layers, so that it can evolve through time.</p>
+<p>In order to cope with different hardware platforms, it relies on a hardware abstraction layer called "Drivar".</p>
 <!--more-->
-<p>...  But still in the pipeline are  :</p>
+<p>Drivar is (currently) a Python library that provides a simple and stable API to give access to :</p>
 <ul>
-<li>An up-to-date Google Blockly powered webide</li>
-<li>A complete Raspbian SD card image link</li>
-<li>A Mindstorm NXT compatible abstraction layer</li>
-<li>Disqus comments support</li>
-<li>Facebook integration</li>
+<li>Controlling the activity of the car motors (direction of the rotation, speed).</li>
+<li>Obtaining reading from sensors (proximity ultrasonic sensors for instance).</li>
+<li>Acquiring and processing images and videos for image recognition.</li>
 </ul>
-<p>Stay tuned !</p>
+<p>Today, I have started writing the "Drivar NXT" classes, that allow the Raspbuggy to run on top of Lego Mindstorm NXT kit.</p>
+<p>NXT kits are quite easy to drive from Python via USB thanks to the excellent NXT-Python library.</p>
+<p>In order to organise our next Robotics challenge and introduce the Raspbuggy platform at CERN, we will use four NXT kits
+that will provide an ideal development target for our contestants.</p>
+<p>Stay tuned...</p>
 </div>
 
 </article>
@@ -128,10 +132,10 @@
 
 
 
-     <time datetime="2015-04-02T16:14:23+02:00" class="updated">
+     <time datetime="2015-05-03T20:45:04+02:00" class="updated">
        Updated
-       <span class="month">Apr</span>
-       <span class="day">02</span>,
+       <span class="month">May</span>
+       <span class="day">03</span>,
        <span class="year">2015</span>
      </time>
 
@@ -139,7 +143,11 @@
 <div class="categories">
   <p class="meta">Tags:</p>
   
-     <a class="category" href="/raspbuggy/categories/website/">website</a>
+     <a class="category" href="/raspbuggy/categories/lego-mindstorm/">lego mindstorm</a>
+  
+     <a class="category" href="/raspbuggy/categories/nxt-python/">nxt-python</a>
+  
+     <a class="category" href="/raspbuggy/categories/drivar/">drivar</a>
   
 </div>
 
@@ -148,7 +156,7 @@
     
       <div class="sharing">
   
-    <a href="https://twitter.com/share" class="twitter-share-button" data-url="/raspbuggy/blog/2015/04/02/we-re-online/" data-via="cmcrobotics" data-counturl="/raspbuggy/blog/2015/04/02/we-re-online/" data-lang="en">Tweet</a>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="/raspbuggy/blog/2015/04/18/a-lego-mindstorm-hardware-layer/" data-via="cmcrobotics" data-counturl="/raspbuggy/blog/2015/04/18/a-lego-mindstorm-hardware-layer/" data-lang="en">Tweet</a>
   
   
   
@@ -157,8 +165,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/raspbuggy/blog/2015/04/18/a-lego-mindstorm-hardware-layer/" title="Previous Post: A Lego Mindstorm hardware layer">&laquo; A Lego Mindstorm Hardware Layer</a>
+        <a class="basic-alignment left" href="/raspbuggy/blog/2015/05/01/powering-issues/" title="Previous Post: Powering issues">&laquo; Powering Issues</a>
       
+      
+        <a class="basic-alignment right" href="/raspbuggy/blog/2015/04/02/we-re-online/" title="Next Post: We're online">We're Online &raquo;</a>
       
     </p>
   </footer>

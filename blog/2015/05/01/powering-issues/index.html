@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>We're online - Raspbuggy</title>
+  <title>Powering issues - Raspbuggy</title>
   <meta name="author" content="CERN Micro Club Robotics">
   
   
@@ -14,7 +14,7 @@
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="canonical" href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/02/we-re-online/">
+  <link rel="canonical" href="http://cmcrobotics.github.io/raspbuggy/blog/2015/05/01/powering-issues/">
   <link href="/raspbuggy/images/favicon-a31051b4c277b2e618d0703b45ab2dba.png" rel="icon">
   <link href="/raspbuggy/stylesheets/screen-cd0a4e87cdbbbddb86ccd18ee87366e1.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="atom.xml" rel="alternate" title="Raspbuggy" type="application/atom+xml">
@@ -80,16 +80,16 @@
 
   <header>
     
-      <h1 class="entry-title">We're Online</h1>
+      <h1 class="entry-title">Powering Issues</h1>
     
     
       <p class="meta">
         
 
 
-    <time datetime="2015-04-02T16:04:00+02:00" pubdate data-updated=true>
-      <span class="month">Apr</span>
-      <span class="day">02</span>,
+    <time datetime="2015-05-01T19:00:00+02:00" pubdate data-updated=true>
+      <span class="month">May</span>
+      <span class="day">01</span>,
       <span class="year">2015</span>
     </time>
   
@@ -101,17 +101,31 @@
   </header>
 
 
-<div class="entry-content"><p>We are online, using a Grain-powered website, a Twitter feed, an RSS feed and a new logo !</p>
+<div class="entry-content"><p>With all the existing options on the market to control DC motors, collect inputs,
+drive outputs, power the whole thing in a standard 5 volts, you would think to controlling a 4WD model car chassis is a no-brainer.
+Well, I must be missing something.</p>
 <!--more-->
-<p>...  But still in the pipeline are  :</p>
+<p><img src="/raspbuggy/images/2015-04-18-raspbuggy-explorer-9963559fd7217c27c86cd4009e6cdcc2.jpg"></p>
+<p>Here's what we have so far :</p>
 <ul>
-<li>An up-to-date Google Blockly powered webide</li>
-<li>A complete Raspbian SD card image link</li>
-<li>A Mindstorm NXT compatible abstraction layer</li>
-<li>Disqus comments support</li>
-<li>Facebook integration</li>
+<li>A 4 wheel drive car chassis, with 4 DC motors that require around 250 mA each.</li>
+<li>A Raspberry Pi B+, requiring a stable 5V 700 mA.</li>
+<li>A dual-USB output battery packing 6600 mAh and a dual 2 A / 1 A power outlet.</li>
 </ul>
-<p>Stay tuned !</p>
+<p>... But no convenient way to connect it all.</p>
+<p>The Pimoroni Pibrella, although adequately powered independently and able to drive the four motors, can only do so in a single direction (no H-Bridge).
+The Pimoroni Explorer Pro (picture above) can certainly power four motors, but only going in the same direction - trying to reverse direction on one set of wheels (essential to change direction with precision) will not work.
+We could certainly go ahead with a simpler chassis and only two motors (using a freely moving wheel at the front), which is what the Explorer Pro HAT is really designed for.
+But we would lose a lot of precision in the movement, as well as the capacity to evolve on difficult terrain.</p>
+<p>Ideally, a simple board that would exhibit :</p>
+<ul>
+<li>Two H-Bridge outputs, powered separately from the Raspberry Pi and capable of driving 2 motors each (2 x 250 mA).</li>
+<li>A ground, 3.3V and 5V individually powered slots.</li>
+<li>Two digital 5V outputs.</li>
+<li>Two digital protected 5V inputs.</li>
+</ul>
+<p>... would be enough to drive the four motors, collect input from two ultrasonic sensors and power a small LED array or an LCD screen.</p>
+<p>Any takers ?</p>
 </div>
 
 </article>
@@ -128,10 +142,10 @@
 
 
 
-     <time datetime="2015-04-02T16:14:23+02:00" class="updated">
+     <time datetime="2015-05-03T20:40:52+02:00" class="updated">
        Updated
-       <span class="month">Apr</span>
-       <span class="day">02</span>,
+       <span class="month">May</span>
+       <span class="day">03</span>,
        <span class="year">2015</span>
      </time>
 
@@ -139,7 +153,9 @@
 <div class="categories">
   <p class="meta">Tags:</p>
   
-     <a class="category" href="/raspbuggy/categories/website/">website</a>
+     <a class="category" href="/raspbuggy/categories/power/">power</a>
+  
+     <a class="category" href="/raspbuggy/categories/explorerhat/">explorerhat</a>
   
 </div>
 
@@ -148,7 +164,7 @@
     
       <div class="sharing">
   
-    <a href="https://twitter.com/share" class="twitter-share-button" data-url="/raspbuggy/blog/2015/04/02/we-re-online/" data-via="cmcrobotics" data-counturl="/raspbuggy/blog/2015/04/02/we-re-online/" data-lang="en">Tweet</a>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="/raspbuggy/blog/2015/05/01/powering-issues/" data-via="cmcrobotics" data-counturl="/raspbuggy/blog/2015/05/01/powering-issues/" data-lang="en">Tweet</a>
   
   
   
@@ -157,8 +173,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/raspbuggy/blog/2015/04/18/a-lego-mindstorm-hardware-layer/" title="Previous Post: A Lego Mindstorm hardware layer">&laquo; A Lego Mindstorm Hardware Layer</a>
       
+        <a class="basic-alignment right" href="/raspbuggy/blog/2015/04/18/a-lego-mindstorm-hardware-layer/" title="Next Post: A Lego Mindstorm hardware layer">A Lego Mindstorm Hardware Layer &raquo;</a>
       
     </p>
   </footer>
