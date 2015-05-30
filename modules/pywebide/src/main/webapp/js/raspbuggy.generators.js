@@ -51,8 +51,8 @@ Blockly.Python['sen_obstacle_distance'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-Blockly.Python['sen_get_color_measurement'] = function(block) {
-  var code = 'drivar.getColorMeasurement()';
+Blockly.Python['sen_get_reflectivity_measurement'] = function(block) {
+  var code = 'drivar.getReflectivityMeasurement()';
   return [code, Blockly.Python.ORDER_NONE];
 };
 

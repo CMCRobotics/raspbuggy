@@ -69,6 +69,7 @@ class AsynchronousFileReader(threading.Thread):
     def run(self):
         '''The body of the thread: read lines and put them on the queue.'''
         for line in iter(self._fd.readline, ''):
+            print "queuing line "+line
             self._queue.put(line)
  
     def eof(self):
@@ -115,7 +116,9 @@ class RaspbuggyService(object):
             scriptFile.write(scriptData["scriptText"]+"\n")
             scriptFile.close()
             print "Executing script "+scriptFile.name+" ..."
-            scriptProcess = subprocess.Popen(["python", scriptFile.name], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=128)
+            
+            # Starting a new python process (with -u for unbuffered output)
+            scriptProcess = subprocess.Popen(["python", "-u", scriptFile.name], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=256)
             
             if(scriptProcess.pid != None):
                 self.m_scriptMonitor.monitor(scriptProcess)
@@ -134,7 +137,16 @@ class RaspbuggyService(object):
     @cherrypy.expose
     @cherrypy.tools.json_out()
     def tailStdOut(self):
-        return  {"tail": "New line\nNew line"}
+        result = []
+        if (self.m_scriptMonitor != None):
+            queue = self.m_scriptMonitor.getStdoutQueue()
+            for x in xrange(min(100, queue.qsize())):
+                try:
+                    val = queue.get_nowait()
+                    result.append(val)
+                except Empty:
+                    pass
+        return  {"tail": result}
 
 
 if __name__ == '__main__':

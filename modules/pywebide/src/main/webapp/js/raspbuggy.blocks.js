@@ -120,11 +120,11 @@ Blockly.Blocks['sen_obstacle_presence'] = {
   }
 };
 
-Blockly.Blocks['sen_get_color_measurement'] = {
+Blockly.Blocks['sen_get_reflectivity_measurement'] = {
   init: function() {
     this.setColour(120);
     this.appendDummyInput()
-        .appendField("Get color measurement");
+        .appendField("Get reflectivity measurement");
     this.setOutput(true, "Number");
     this.setTooltip('');
   }
