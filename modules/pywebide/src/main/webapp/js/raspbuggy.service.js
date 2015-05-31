@@ -2,6 +2,7 @@ function Raspbuggy() {
   this.statusTimer = null;
   this.statusUpdateCallbacks = [];
   this.m_scriptOutputCallback = null;
+  this.SCRIPT_PREFIX = "from Drivar import Drivar\nfrom DrivarNxt import DrivarNxt\ndrivar = DrivarNxt()\ndrivar.initialize()\n\n"
 }
 
 
@@ -17,6 +18,10 @@ Raspbuggy.prototype.addStatusUpdateCallback = function(listener){
 Raspbuggy.prototype.setScriptOutputCallback = function(listener){
     this.m_scriptOutputCallback = listener;
 };
+
+Raspbuggy.prototype.getCompleteScriptCode = function(inputScript){
+    return this.SCRIPT_PREFIX + inputScript;
+}
 
 
 Raspbuggy.prototype.invokeGetStatusTimeout = function(){

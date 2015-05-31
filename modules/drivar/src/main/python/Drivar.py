@@ -1,4 +1,3 @@
-## @package drivar
 #  Driver library for Raspbuggy
 '''
 Created on Mar 18, 2015
@@ -71,10 +70,15 @@ class Drivar(object):
       Orders the pen to be raised or lowered
     '''
     @abstractmethod
-    def pen(self, action):
+    def rotatePen(self, angle):
         pass
 
     @abstractmethod
     def getReflectivityMeasurement(self):
         pass
+
+    @abstractmethod
+    def wait(self, milliseconds):
+        pass
+
 

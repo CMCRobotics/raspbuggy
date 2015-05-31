@@ -6,7 +6,7 @@ Blockly.Blocks['mov_move'] = {
         .appendField(new Blockly.FieldDropdown([["Forward", "FORWARD"], ["Backwards", "BACKWARDS"]]), "direction")
         .appendField("for")
         .appendField(new Blockly.FieldTextInput("500"), "duration")
-        .appendField("milliseconds");
+        .appendField("milliseconds.");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
@@ -20,7 +20,7 @@ Blockly.Blocks['mov_turn'] = {
         .appendField(new Blockly.FieldDropdown([["Turn left", "LEFT"], ["Turn right", "RIGHT"]]), "direction")
         .appendField("by")
         .appendField(new Blockly.FieldAngle("90"), "degrees")
-        .appendField("degrees");
+        .appendField("degrees.");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
@@ -46,7 +46,7 @@ Blockly.Blocks['mov_stop'] = {
   init: function() {
     this.setColour(20);
     this.appendDummyInput()
-        .appendField("Stop the wheels");
+        .appendField("Stop the wheels.");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
@@ -59,7 +59,7 @@ Blockly.Blocks['vis_acquire'] = {
     this.appendDummyInput()
         .appendField("Take a picture of")
         .appendField(new Blockly.FieldDropdown([["320 x 240", "x320"], ["640 x 480", "x640"], ["1920x1080", "x1920"]]), "resolution")
-        .appendField("pixels");
+        .appendField("pixels.");
     this.setOutput(true, "vis_picture");
     this.setTooltip('');
   }
@@ -90,7 +90,7 @@ Blockly.Blocks['vis_filter'] = {
         .appendField(new Blockly.FieldDropdown([["Black and white", "BLACK"], ["Red", "RED"], ["Green", "GREEN"], ["Blue", "BLUE"], ["Yellow", "YELLOW"]]), "filter");
     this.appendValueInput("NAME")
         .setCheck("vis_picture")
-        .appendField("To this picture");
+        .appendField("To this picture.");
     this.setOutput(true, "vis_picture");
     this.setTooltip('');
   }
@@ -100,7 +100,7 @@ Blockly.Blocks['sen_obstacle_distance'] = {
   init: function() {
     this.setColour(120);
     this.appendDummyInput()
-        .appendField("Measure distance to the obstacle");
+        .appendField("Measure distance to the obstacle.");
     this.setOutput(true, "Number");
     this.setTooltip('');
   }
@@ -124,7 +124,7 @@ Blockly.Blocks['sen_get_reflectivity_measurement'] = {
   init: function() {
     this.setColour(120);
     this.appendDummyInput()
-        .appendField("Get reflectivity measurement");
+        .appendField("Get reflectivity measurement.");
     this.setOutput(true, "Number");
     this.setTooltip('');
   }
@@ -143,24 +143,16 @@ Blockly.Blocks['time_wait'] = {
   }
 };
 
-Blockly.Blocks['pen_lower'] = {
+Blockly.Blocks['pen_rotate'] = {
   init: function() {
     this.setColour(60);
     this.appendDummyInput()
-        .appendField("Lower the pen");
+        .appendField("Rotate the pen by ")
+        .appendField(new Blockly.FieldDropdown([["-90", "-90"], ["-45", "-45"], ["-15", "-15"], ["+15", "15"], ["+45", "45"], ["+90", "90"]]), "degrees")
+        .appendField(" degrees.");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
   }
 };
 
-Blockly.Blocks['pen_raise'] = {
-  init: function() {
-    this.setColour(60);
-    this.appendDummyInput()
-        .appendField("Raise the pen");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('');
-  }
-};

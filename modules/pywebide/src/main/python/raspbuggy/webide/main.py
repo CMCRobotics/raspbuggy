@@ -12,11 +12,9 @@ import time
 import threading
 import Queue
 import tempfile
-
+import logging
 
 BASE_DRIVAR_IMPORTS = """
-# import drivar
-# from drivar.DrivarNxt import DrivarNxt
 """
 
 class ScriptMonitor(object):
@@ -163,6 +161,8 @@ if __name__ == '__main__':
     BOOTSTRAP_ROOT = os.getenv('BOOTSTRAP_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/bootstrap/3.3.4")
     JQUERY_ROOT = os.getenv('JQUERY_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/jquery/1.9.1")
     cherrypy.server.socket_host = '0.0.0.0'
+    accessLogger = logging.getLogger('cherrypy.access')
+    accessLogger.setLevel(logging.WARNING)
     cherrypy.quickstart(RaspbuggyService(), "/", 
         {
               '/':

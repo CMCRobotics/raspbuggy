@@ -69,13 +69,10 @@ Blockly.Python['time_wait'] = function(block) {
   return code;
 };
 
-Blockly.Python['pen_lower'] = function(block) {
-  var code = 'drivar.pen(drivar.PEN_LOWER)\n';
+Blockly.Python['pen_rotate'] = function(block) {
+  var angle_degrees = block.getFieldValue('degrees');
+  var code = 'drivar.rotatePen(angle=int(\''+angle_degrees+'\'))\n';
   return code;
 };
 
-Blockly.Python['pen_raise'] = function(block) {
-  var code = 'drivar.pen(drivar.PEN_RAISE)\n';
-  return code;
-};
 

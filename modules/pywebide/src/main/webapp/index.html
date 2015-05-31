@@ -109,7 +109,7 @@
         BlocklyStorage.backupOnUnload();
         blockly.addChangeListener(function (){
            window.Blockly.Python.INFINITE_LOOP_TRAP = null;
-           var code = window.Blockly.Python.workspaceToCode();
+           var code = raspbuggy.getCompleteScriptCode(window.Blockly.Python.workspaceToCode());
            $("#raspbuggy-script-preview-textarea").val(code);
         });
       }
@@ -179,7 +179,7 @@
       
       window.runCode = function(){
         window.Blockly.Python.INFINITE_LOOP_TRAP = null;
-        var code = window.Blockly.Python.workspaceToCode();
+        var code = raspbuggy.getCompleteScriptCode(window.Blockly.Python.workspaceToCode());
         raspbuggy.executeScript(code);
       }
       window.clearConsole = function(){

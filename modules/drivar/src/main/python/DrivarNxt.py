@@ -1,4 +1,3 @@
-## @package drivar
 #  Driver library for Raspbuggy - Lego py-nxt implementation
 '''
 Created on Mar 18, 2015
@@ -7,10 +6,10 @@ Created on Mar 18, 2015
 '''
 
 import nxt.locator
-from nxt.motor import Motor,PORT_A,PORT_C
-from nxt.sensor import Ultrasonic,PORT_4
+from nxt.motor import Motor,PORT_A,PORT_B,PORT_C
+from nxt.sensor import Ultrasonic,PORT_1,PORT_2,PORT_3,PORT_4
 
-from drivar.Drivar import Drivar
+from Drivar import Drivar
 import time
 
 class DrivarNxt(Drivar):
@@ -21,6 +20,7 @@ class DrivarNxt(Drivar):
         self.m_leftMotor = None
         self.m_rightMotor = None
         self.m_ultrasonicSensor = None
+        self.m_lightSensor = None
         self.m_moving = False
 
     def initialize(self):
@@ -29,6 +29,7 @@ class DrivarNxt(Drivar):
         self.m_leftMotor = Motor(self.m_block, PORT_A)
         self.m_rightMotor = Motor(self.m_block, PORT_C)
         self.m_ultrasonicSensor = Ultrasonic(self.m_block, PORT_4)
+        #self.m_lightSensor = LightSensor(self.m_block, PORT_3)
         self.m_initialized = True
         
 
@@ -96,8 +97,15 @@ class DrivarNxt(Drivar):
         else:
             return False
     
+    def rotatePen(self, angle):
+        pass
+
     def getReflectivityMeasurement(self):
         return 0
+        #return self.m_lightSensor.get_sample()
+        
+    def wait(self, milliseconds):
+        time.sleep(milliseconds/1000)
 
     '''
       Return the NXT speed equivalent for the given DRIVAR speed flag
@@ -115,3 +123,5 @@ class DrivarNxt(Drivar):
 
 Drivar.register(DrivarNxt)
 
+if __name__ == '__main__':
+    _drivar = DrivarNxt()
