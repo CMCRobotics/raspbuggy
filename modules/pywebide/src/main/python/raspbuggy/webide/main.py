@@ -15,8 +15,8 @@ import tempfile
 
 
 BASE_DRIVAR_IMPORTS = """
-import drivar
-from drivar.DrivarNxt import DrivarNxt
+# import drivar
+# from drivar.DrivarNxt import DrivarNxt
 """
 
 class ScriptMonitor(object):
@@ -75,7 +75,6 @@ class AsynchronousFileReader(threading.Thread):
     def run(self):
         '''The body of the thread: read lines and put them on the queue.'''
         for line in iter(self._fd.readline, ''):
-            print "queuing line "+line
             self._queue.put(line)
  
     def eof(self):
