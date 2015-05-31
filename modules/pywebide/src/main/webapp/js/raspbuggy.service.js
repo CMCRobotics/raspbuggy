@@ -39,8 +39,8 @@ Raspbuggy.prototype.updateStatus= function() {
     }, reply);
 
   })
-  .fail(function() {
-    console.log( "error : Could not obtain raspbuggy  status." );
+  .fail(function(httpReply) {
+    console.log( "Error - Could not obtain raspbuggy  status : "+httpReply.statusText+" ("+httpReply.status+")" );
     $.each(thisRaspbuggy.statusUpdateCallbacks, function( cb ){
             try{
                 this({running: -3, exitCode: -1});
@@ -61,8 +61,8 @@ Raspbuggy.prototype.tailStdOut= function() {
         thisRaspbuggy.m_scriptOutputCallback(reply.tail);
     }
   })
-  .fail(function() {
-    console.log( "error : Could not flush raspbuggy standard output." );
+  .fail(function(httpReply) {
+    console.log( "Error - Could not flush raspbuggy standard output: "+httpReply.statusText+" ("+httpReply.status+")" );
   });
 };
 
@@ -72,7 +72,10 @@ Raspbuggy.prototype.executeScript= function(scriptContents) {
   $.ajaxSetup({ 
     contentType: "application/json"
   });
-  $.post( "/execute","{\"scriptText\":\"import time\\nfor i in range(10):\\n    print 'hello world '+str(i)\\n    time.sleep(1)\"}", function(reply) {
+  var scriptToExecute = scriptContents;
+  scriptToExecute = scriptToExecute.replace(/\n/g,'\\n');
+  scriptToExecute = scriptToExecute.replace(/"/g,'\\"');
+  $.post( "/execute","{\"scriptText\":\""+scriptToExecute+"\"}", function(reply) {
     if(reply.success){
       // Update the status immediately
       thisRaspbuggy.updateStatus();
@@ -80,9 +83,9 @@ Raspbuggy.prototype.executeScript= function(scriptContents) {
       window.alert("Script execution failed : "+reply.message);
     }
   },"json")
-//  .fail(function() {
-//    console.log( "error : Could not execute raspbuggy script." );
-//  });
+  .fail(function(httpReply) {
+    window.alert( "Error - Could not execute raspbuggy script : "+httpReply.statusText+" ("+httpReply.status+")" );
+  });
 };
 
 raspbuggy = new Raspbuggy();

@@ -75,6 +75,6 @@ class Drivar(object):
         pass
 
     @abstractmethod
-    def getColorMeasurement(self):
+    def getReflectivityMeasurement(self):
         pass
 

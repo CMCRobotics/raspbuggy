@@ -13,6 +13,12 @@ import threading
 import Queue
 import tempfile
 
+
+BASE_DRIVAR_IMPORTS = """
+import drivar
+from drivar.DrivarNxt import DrivarNxt
+"""
+
 class ScriptMonitor(object):
     '''
     Monitors the script execution and updates result statuses
@@ -113,6 +119,9 @@ class RaspbuggyService(object):
             # Write the script to a temporary file
             #scriptFile = tempfile.NamedTemporaryFile(prefix='raspbuggy-script-')
             scriptFile = open("/tmp/raspbuggy-script.py", "w")
+            scriptFile.write(BASE_DRIVAR_IMPORTS+"\n")
+            
+            
             scriptFile.write(scriptData["scriptText"]+"\n")
             scriptFile.close()
             print "Executing script "+scriptFile.name+" ..."
@@ -154,8 +163,6 @@ if __name__ == '__main__':
     BLOCKLY_ROOT = os.getenv('BLOCKLY_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/blockly/b35c0fbfa2")
     BOOTSTRAP_ROOT = os.getenv('BOOTSTRAP_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/bootstrap/3.3.4")
     JQUERY_ROOT = os.getenv('JQUERY_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/jquery/1.9.1")
-    #print os.path.abspath(WEBAPP_ROOT)
-    #print os.path.abspath(BLOCKLY_ROOT)
     cherrypy.quickstart(RaspbuggyService(), "/", 
         {
               '/':

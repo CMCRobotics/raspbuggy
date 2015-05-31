@@ -95,7 +95,10 @@ class DrivarNxt(Drivar):
             return True
         else:
             return False
-        
+    
+    def getReflectivityMeasurement(self):
+        return 0
+
     '''
       Return the NXT speed equivalent for the given DRIVAR speed flag
     '''

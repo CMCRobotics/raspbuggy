@@ -47,27 +47,24 @@
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
           </button>
           <img style="padding-top:8px" src="rb-banner.png">
         </div>
           <div id="navbar">
             <ul class="nav navbar-nav">
-              <!--li class="raspbuggy-console-switch active" onClick="togglePanels()"><a href="#">Program</a></li>
-              <li class="raspbuggy-console-switch" onClick="togglePanels()"><a href="#">Console</a></li-->
-              <li class="">&nbsp;</li>
               <li><a href="#" onClick="runCode()"><span id="raspbuggy-script-action-icon" class="glyphicon glyphicon-play" aria-hidden="true"></span> <span id="raspbuggy-script-action-label">Run</span></a></li>
               <li><a href="#">Current Status : <b><span id="raspbuggy-status-label">Stopped</span></b> <span id="raspbuggy-status-icon" class="glyphicon glyphicon-stop" aria-hidden="true"></span></a></li>
             </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Files</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Open...</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> Save as...</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Help</a></li>
           </ul>
          </div>
       </div>
     </nav>
-  <div id="panel-program" class="raspbuggy-console container-fluid">
+  <div id="panel-program" class="container-fluid">
         <div class="row">
               <div class="col-sm-12" style="margin-top:40px">&nbsp;</div>
           </div>
@@ -76,38 +73,25 @@
                 <iframe id="blocklyFrame" style="width:100%; height:100%;" src="frame.html"></iframe>
               </div>
               <div class="col-sm-12 col-lg-4">
-                  <!--nav class="navbar navbar-inverse" style="margin-bottom:2px">
-                    <div class="navbar-header">
-                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                      </button>
-                    </div>
-    
-                    <div class="collapse navbar-collapse">
-                      <ul class="nav navbar-nav">
-                              <li class="active"><a onclick="showConsolePanel()" href="#">Console</a></li>
-                              <li><a onclick="showScriptPreviewPanel()" href="#">Script preview</a></li>
-                            </ul>
-                         </div>
-                 </nav-->
-                 <ul class="nav nav-tabs" role="tablist">
+                 <ul class="nav nav-tabs" role="tablist" style="border-bottom:0px">
                       <li class="active"><a href="#console" role="tab" data-toggle="tab">Console</a></li>
                       <li><a href="#script-preview" role="tab" data-toggle="tab">Script preview</a></li>
                     </ul>
                     
                  <div class="tab-content">
                   <div class="tab-pane active" id="console">
-                     <div id="raspbuggy-console-panel" class="panel panel-default" style="border-radius-top-left:0px">
+                      <div class="btn-group btn-group-sm" role="group" style="padding:5px;background-color:white;width:100%;border-top-right-radius: 4px;">
+                          <a href="#"  onclick="clearConsole()" class="btn btn-default"><span class="glyphicon glyphicon-ban-circle"></span> Clear</a>
+                          <!--a href="#" class="btn btn-default">Filter</a-->
+                        </div>
+                      <div id="raspbuggy-console-panel" class="panel panel-default" style="border-top-left-radius: 0px;border-top-right-radius: 0px;">
                          <div class="panel-body" style="padding:0px">
                            <textarea readonly id="raspbuggy-console-textarea" class="col-sm-12"></textarea>
                           </div>
                       </div>
                   </div>
                   <div class="tab-pane" id="script-preview">
-                     <div id="raspbuggy-script-preview-panel" class="panel panel-default" style="border-radius-top-left:0px">
+                     <div id="raspbuggy-script-preview-panel" class="panel panel-default" style="border-top-left-radius: 0px;border-top-right-radius: 0px;">
                         <div class="panel-body" style="padding:0px">
                             <textarea readonly id="raspbuggy-script-preview-textarea" class="col-sm-12"></textarea>
                          </div>
@@ -136,10 +120,6 @@
     
     <script src="js/blockly_storage.js"></script>
     <script type="text/javascript">
- //  function togglePanels(){
- //    $(".raspbuggy-console").toggleClass("raspbuggy-hidden");
- //    $(".raspbuggy-console-switch").toggleClass("active");
- //  }
     
     function windowDimensions() { 
         var myWidth = 0, myHeight = 0;
@@ -157,9 +137,8 @@
       // Leave space for the top navigation bar
       $('#blocklyFrame').height((dim[1]-80) + "px");
       // Leave space for the top navigation bar
-      $('#raspbuggy-console-panel').height((dim[1]-135) + "px");
-      $('#raspbuggy-console-textarea').height((dim[1]-140) + "px");
-      $('#raspbuggy-script-preview-textarea').height((dim[1]-140) + "px");
+      $('#raspbuggy-console-textarea').height((dim[1]-168) + "px");
+      $('#raspbuggy-script-preview-textarea').height((dim[1]-128) + "px");
       
       // Register Raspbuggy execution status listener
       raspbuggy.addStatusUpdateCallback(function(statusUpdate){
@@ -190,7 +169,8 @@
       raspbuggy.setScriptOutputCallback(function(linesArray){
         $.each(linesArray, function(line, value){
             try{
-                console.log("Script:"+value);
+               // console.log("Script:"+value);
+               $("#raspbuggy-console-textarea").append(value);
             }catch(err){
                 console.log("Could not update service status : "+err);
             }
@@ -198,13 +178,15 @@
       
       });
    
-     // $( "#raspbuggy-console-panel" ).resizable();
       raspbuggy.start();
       
       window.runCode = function(){
         window.Blockly.Python.INFINITE_LOOP_TRAP = null;
         var code = window.Blockly.Python.workspaceToCode();
         raspbuggy.executeScript(code);
+      }
+      window.clearConsole = function(){
+        $('#raspbuggy-console-textarea').val("");
       }
       
     });
