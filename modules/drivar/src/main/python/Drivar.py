@@ -42,7 +42,7 @@ class Drivar(object):
         pass
     
     @abstractmethod
-    def turn(self, direction = DIR_LEFT, angle = 90):
+    def turn(self, direction = DIR_LEFT, angle = 90, callback = None):
         pass
 
     @abstractmethod

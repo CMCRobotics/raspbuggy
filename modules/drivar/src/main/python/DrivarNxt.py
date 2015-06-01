@@ -60,7 +60,7 @@ class DrivarNxt(Drivar):
         if callback is not None:
             callback()
         
-    def turn(self, direction = Drivar.DIR_LEFT, angle = 90):
+    def turn(self, direction = Drivar.DIR_LEFT, angle = 90, callback = None):
         left_power = -100
         right_power = 100
         if(direction == Drivar.DIR_RIGHT):
