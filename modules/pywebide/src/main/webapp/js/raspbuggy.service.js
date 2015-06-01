@@ -2,7 +2,8 @@ function Raspbuggy() {
   this.statusTimer = null;
   this.statusUpdateCallbacks = [];
   this.m_scriptOutputCallback = null;
-  this.SCRIPT_PREFIX = "from Drivar import Drivar\nfrom DrivarNxt import DrivarNxt\ndrivar = DrivarNxt()\ndrivar.initialize()\n\n"
+//  this.SCRIPT_PREFIX = "from Drivar import Drivar\nfrom DrivarNxt import DrivarNxt\ndrivar = DrivarNxt()\ndrivar.initialize()\n\n"
+  this.SCRIPT_PREFIX = "from Drivar import Drivar\nfrom DrivarNoop import DrivarNoop\ndrivar = DrivarNoop()\nimport logging\nlogging.basicConfig(level=logging.DEBUG)\ndrivar.initialize()\n\n"
 }
 
 
