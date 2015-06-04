@@ -1,35 +1,26 @@
-#  Driver library for Raspbuggy - Lego py-nxt implementation
+#  Driver library for Raspbuggy - Noop implementation for simulation and testing
 '''
-Created on Mar 18, 2015
+Created on Jun 01, 2015
 
 @author: bcopy
 '''
 
-import nxt.locator
-from nxt.motor import Motor,PORT_A,PORT_B,PORT_C
-from nxt.sensor import Ultrasonic,Light,PORT_1,PORT_2,PORT_3,PORT_4
-
 from Drivar import Drivar
 import time
+import logging
 
-class DrivarNxt(Drivar):
+class DrivarNoop(Drivar):
     
-    def __init__(self):
+    def __init__(self, enforceSleepingTime=False):
         self.m_initialized = False
-        self.m_block = None
-        self.m_leftMotor = None
-        self.m_rightMotor = None
-        self.m_ultrasonicSensor = None
-        self.m_lightSensor = None
         self.m_moving = False
+        self.m_logger = logging.getLogger(__name__)
+        self.m_enforceSleepingTime = enforceSleepingTime
+        self.m_distanceToNextObstacle = 2000
 
     def initialize(self):
-        super(DrivarNxt,self).initialize()
-        self.m_block = nxt.locator.find_one_brick()
-        self.m_leftMotor = Motor(self.m_block, PORT_A)
-        self.m_rightMotor = Motor(self.m_block, PORT_C)
-        self.m_ultrasonicSensor = Ultrasonic(self.m_block, PORT_4)
-        self.m_lightSensor = Light(self.m_block, PORT_3)
+        super(DrivarNoop,self).initialize()
+        self.m_logger.debug("Drivar : initialized")
         self.m_initialized = True
         
 
@@ -37,7 +28,8 @@ class DrivarNxt(Drivar):
         durationInMs = max(durationInMs,100)
         _direct = direction
         self.rotateWheels(direction = _direct)
-        time.sleep(durationInMs/1000)
+        if(self.m_enforceSleepingTime):
+            time.sleep(durationInMs/1000)
         self.stop()
         if callback is not None:
             callback()
@@ -52,56 +44,62 @@ class DrivarNxt(Drivar):
             if(power > 0):
                 power = power * -1
         # Get the wheels turning
-        if(wheelSet == Drivar.WHEELS_LEFT or wheelSet == Drivar.WHEELS_BOTH):
-            self.m_leftMotor.run(power)
-        if(wheelSet == Drivar.WHEELS_RIGHT or wheelSet == Drivar.WHEELS_BOTH):
-            self.m_rightMotor.run(power)
+        wheelSet = 'all'
+        if(wheelSet == Drivar.WHEELS_LEFT):
+            wheelSet = 'left'
+        if(wheelSet == Drivar.WHEELS_RIGHT):
+            wheelSet = 'right'
+        
+        self.m_logger.info("Drivar : Moving %s wheels with power %d.", wheelSet,power)
         self.m_moving = True
         if callback is not None:
             callback()
         
     def turn(self, direction = Drivar.DIR_LEFT, angle = 90, callback = None):
-        left_power = -100
-        right_power = 100
-        if(direction == Drivar.DIR_RIGHT):
-            left_power *= -1 
-            right_power *= -1
-        self.m_leftMotor.turn(left_power, angle)
-        self.m_rightMotor.turn(right_power, angle)
-
-
-    
-    
-    def stop(self, callback = None):
-        self.m_leftMotor.idle()
-        self.m_rightMotor.idle()
-        self.m_moving = False
+        _dir = "left"
+        if(direction == DrivarDIR_RIGHT):
+            _dir = "right"
+        self.m_logger.info("Drivar : Turning the vehicle %s by %d degrees.",wheelSet,power)
+        if(self.m_enforceSleepingTime):
+            time.sleep(0.5)
         if callback is not None:
             callback()
-        
+    
+    def stop(self, callback = None):
+        self.m_moving = False
+        self.m_logger.info("Drivar : Stopping the vehicle.")
+        if callback is not None:
+            callback()
  
- 
+    def setDistanceToObstacle(self, distance):
+        self.m_logger.info("Drivar : Set distance to next obstacle : %d cm", distance)
+        self.m_distanceToNextObstacle = distance
     '''
       Return the distance to the nearest obstacle, in centimeters
     '''
     def getDistanceToObstacle(self):
-        return self.m_ultrasonicSensor.get_sample()
+        self.m_logger.info("Drivar : Getting distance to obstacle.")
+        return self.m_distanceToNextObstacle
  
     '''
       Indicate with a boolean whether there is an obstacle within the given distance
     '''
     def isObstacleWithin(self, distance):
-        dist = self.m_ultrasonicSensor.get_sample()
+        self.m_logger.debug("Drivar : Measuring whether obstacle is within %d cms", distance)
+        dist = self.m_distanceToNextObstacle
         if(dist <= distance):
+            self.m_logger.info("Drivar : Obstacle found within %d cms", distance)
             return True
         else:
+            self.m_logger.info("Drivar : Obstacle NOT found within %d cms", distance)
             return False
     
     def rotatePen(self, angle):
         pass
 
     def getReflectivityMeasurement(self):
-        return self.m_lightSensor.get_sample()
+        return 0
+        #return self.m_lightSensor.get_sample()
         
     def wait(self, milliseconds):
         time.sleep(milliseconds/1000)
@@ -120,7 +118,7 @@ class DrivarNxt(Drivar):
         else :
             return 100 
 
-Drivar.register(DrivarNxt)
+Drivar.register(DrivarNoop)
 
 if __name__ == '__main__':
-    _drivar = DrivarNxt()
+    _drivar = DrivarNoop()
