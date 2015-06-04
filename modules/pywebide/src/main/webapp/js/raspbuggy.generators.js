@@ -65,7 +65,7 @@ Blockly.Python['sen_obstacle_presence'] = function(block) {
 
 Blockly.Python['time_wait'] = function(block) {
   var text_waitinms = block.getFieldValue('waitInMs');
-  var code = 'drivar.wait('+(text_waitinms/1000)+')\n';
+  var code = 'drivar.wait('+(text_waitinms)+')\n';
   return code;
 };
 
