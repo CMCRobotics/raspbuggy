@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title><![CDATA[Raspbuggy]]></title><link href="http://cmcrobotics.github.io/raspbuggy/atom.xml" rel="self"/><link href="http://cmcrobotics.github.io/raspbuggy/"/><updated>2015-06-04T15:59:22+02:00</updated><id>http://cmcrobotics.github.io/raspbuggy/</id><author><name><![CDATA[CERN Micro Club Robotics]]></name><email><![CDATA[cmc.robotics@cern.ch]]></email></author><generator uri="http://sysgears.com/grain/">Grain</generator><entry><title type="html"><![CDATA[Integration tests with Lego Mindstorms NXT]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/06/02/integration-tests-with-lego-mindstorms-nxt/"/><updated>2015-06-04T15:59:22+02:00</updated><id>/blog/2015/06/02/integration-tests-with-lego-mindstorms-nxt/</id><content type="html"><![CDATA[<p>Successful integration tests... but we do not an ABORT SCRIPT button !</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title><![CDATA[Raspbuggy]]></title><link href="http://cmcrobotics.github.io/raspbuggy/atom.xml" rel="self"/><link href="http://cmcrobotics.github.io/raspbuggy/"/><updated>2015-06-04T16:32:21+02:00</updated><id>http://cmcrobotics.github.io/raspbuggy/</id><author><name><![CDATA[CERN Micro Club Robotics]]></name><email><![CDATA[cmc.robotics@cern.ch]]></email></author><generator uri="http://sysgears.com/grain/">Grain</generator><entry><title type="html"><![CDATA[Integration tests with Lego Mindstorms NXT]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/06/02/integration-tests-with-lego-mindstorms-nxt/"/><updated>2015-06-04T16:32:21+02:00</updated><id>/blog/2015/06/02/integration-tests-with-lego-mindstorms-nxt/</id><content type="html"><![CDATA[<p>Successful integration tests... but we do need an ABORT SCRIPT button !</p>
 <!--more-->
 <p>A quick session at the CERN Robotics club to test the full environment and
 demonstrate what we have so far revealed a few minor bugs in the Javascript,
@@ -6,7 +6,7 @@ the fact that the NXT Light sensor API does not seem to work as expected (to
 be investigated), and the need to have an ABORT SCRIPT feature for all
 those infinite loops and errors in waiting times....</p>
 <p>But overall, we are ready for the 17th June programming challenge at CERN Ideasquare !</p>
-]]></content></entry><entry><title type="html"><![CDATA[A fully working programming environment for Lego Mindstorms NXT]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/05/31/a-fully-working-programming-environment-for-lego-mindstorms-nxt/"/><updated>2015-06-01T14:52:34+02:00</updated><id>/blog/2015/05/31/a-fully-working-programming-environment-for-lego-mindstorms-nxt/</id><content type="html"><![CDATA[<p>Finally, the programming environment is fully working for Lego Mindstorms NXT !
+]]></content></entry><entry><title type="html"><![CDATA[A fully working programming environment for Lego Mindstorms NXT]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/05/31/a-fully-working-programming-environment-for-lego-mindstorms-nxt/"/><updated>2015-06-04T16:32:21+02:00</updated><id>/blog/2015/05/31/a-fully-working-programming-environment-for-lego-mindstorms-nxt/</id><content type="html"><![CDATA[<p>Finally, the programming environment is fully working for Lego Mindstorms NXT !
 <img src="/raspbuggy/images/2015-05-31-webide-7cbd246be344a024612a8f410796bb46.jpg"></p>
 <!--more-->
 <p>The web-based programming environment supports :</p>
@@ -20,7 +20,7 @@ those infinite loops and errors in waiting times....</p>
 <p>The generated script will currently only work for the Drivar Lego Mindstorms NXT layer, but it will be
 very easily adapted to work with the Pimoroni Explorer HAT, or even a custom adapter board if we happen to come up with one.</p>
 <p><img src="/raspbuggy/images/2015-05-31-webide-1-20b30a3e4f554537bd05e503e98927ba.jpg"></p>
-]]></content></entry><entry><title type="html"><![CDATA[Powering issues]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/05/01/powering-issues/"/><updated>2015-05-03T20:40:52+02:00</updated><id>/blog/2015/05/01/powering-issues/</id><content type="html"><![CDATA[<p>With all the existing options on the market to control DC motors, collect inputs,
+]]></content></entry><entry><title type="html"><![CDATA[Powering issues]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/05/01/powering-issues/"/><updated>2015-06-04T14:59:01+02:00</updated><id>/blog/2015/05/01/powering-issues/</id><content type="html"><![CDATA[<p>With all the existing options on the market to control DC motors, collect inputs,
 drive outputs, power the whole thing in a standard 5 volts, you would think to controlling a 4WD model car chassis is a no-brainer.
 Well, I must be missing something.</p>
 <!--more-->
@@ -45,7 +45,7 @@ But we would lose a lot of precision in the movement, as well as the capacity to
 </ul>
 <p>... would be enough to drive the four motors, collect input from two ultrasonic sensors and power a small LED array or an LCD screen.</p>
 <p>Any takers ?</p>
-]]></content></entry><entry><title type="html"><![CDATA[A Lego Mindstorm hardware layer]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/18/a-lego-mindstorm-hardware-layer/"/><updated>2015-05-03T20:45:04+02:00</updated><id>/blog/2015/04/18/a-lego-mindstorm-hardware-layer/</id><content type="html"><![CDATA[<p>The Raspbuggy platform is destined to be an open educational programming platform. It is designed to adapt to a
+]]></content></entry><entry><title type="html"><![CDATA[A Lego Mindstorm hardware layer]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/18/a-lego-mindstorm-hardware-layer/"/><updated>2015-06-04T14:59:01+02:00</updated><id>/blog/2015/04/18/a-lego-mindstorm-hardware-layer/</id><content type="html"><![CDATA[<p>The Raspbuggy platform is destined to be an open educational programming platform. It is designed to adapt to a
 large array of hardware layers, so that it can evolve through time.</p>
 <p>In order to cope with different hardware platforms, it relies on a hardware abstraction layer called "Drivar".</p>
 <!--more-->
@@ -60,7 +60,7 @@ large array of hardware layers, so that it can evolve through time.</p>
 <p>In order to organise our next Robotics challenge and introduce the Raspbuggy platform at CERN, we will use four NXT kits
 that will provide an ideal development target for our contestants.</p>
 <p>Stay tuned...</p>
-]]></content></entry><entry><title type="html"><![CDATA[We're online]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/02/we-re-online/"/><updated>2015-04-02T16:14:23+02:00</updated><id>/blog/2015/04/02/we-re-online/</id><content type="html"><![CDATA[<p>We are online, using a Grain-powered website, a Twitter feed, an RSS feed and a new logo !</p>
+]]></content></entry><entry><title type="html"><![CDATA[We're online]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/02/we-re-online/"/><updated>2015-06-04T14:59:01+02:00</updated><id>/blog/2015/04/02/we-re-online/</id><content type="html"><![CDATA[<p>We are online, using a Grain-powered website, a Twitter feed, an RSS feed and a new logo !</p>
 <!--more-->
 <p>...  But still in the pipeline are  :</p>
 <ul>
