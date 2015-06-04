@@ -3,7 +3,7 @@ Blockly.Blocks['mov_move'] = {
     this.setColour(20);
     this.appendDummyInput()
         .appendField("Move")
-        .appendField(new Blockly.FieldDropdown([["Forward", "FORWARD"], ["Backwards", "BACKWARDS"]]), "direction")
+        .appendField(new Blockly.FieldDropdown([["Forward", "FORWARD"], ["Backwards", "BACKWARD"]]), "direction")
         .appendField("for")
         .appendField(new Blockly.FieldTextInput("500"), "duration")
         .appendField("milliseconds.");
@@ -34,7 +34,7 @@ Blockly.Blocks['mov_rotate'] = {
         .appendField("Rotate")
         .appendField(new Blockly.FieldDropdown([["the left", "LEFT"], ["the right", "RIGHT"], ["left and right", "BOTH"]]), "wheels")
         .appendField("wheels")
-        .appendField(new Blockly.FieldDropdown([["forward", "FORWARD"], ["backwards", "BACKWARDS"]]), "direction")
+        .appendField(new Blockly.FieldDropdown([["forward", "FORWARD"], ["backwards", "BACKWARD"]]), "direction")
         .appendField(new Blockly.FieldDropdown([["very slowly", "SLOW"], ["slowly", "MEDIUM"], ["fast", "FAST"]]), "speed");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
