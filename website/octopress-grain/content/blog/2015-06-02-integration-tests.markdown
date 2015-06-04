@@ -8,7 +8,7 @@ comments: true
 published: true
 ---
 
-Successful integration tests... but we do not an ABORT SCRIPT button !
+Successful integration tests... but we do need an ABORT SCRIPT button !
 
 <!--more-->
 
@@ -19,9 +19,6 @@ be investigated), and the need to have an ABORT SCRIPT feature for all
 those infinite loops and errors in waiting times....
 
 But overall, we are ready for the 17th June programming challenge at CERN Ideasquare !
-
-
-
 
 
 

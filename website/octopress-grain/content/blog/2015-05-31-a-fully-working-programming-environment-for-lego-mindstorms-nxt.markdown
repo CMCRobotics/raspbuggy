@@ -26,5 +26,3 @@ very easily adapted to work with the Pimoroni Explorer HAT, or even a custom ada
 <img src="${r '/images/2015-05-31-webide-1.jpg'}">
 
 
-
-
