@@ -1,18 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title><![CDATA[Raspbuggy]]></title><link href="http://cmcrobotics.github.io/raspbuggy/categories/lego-mindstorm/atom.xml" rel="self"/><link href="http://cmcrobotics.github.io/raspbuggy/"/><updated>2015-04-20T00:13:52+02:00</updated><id>http://cmcrobotics.github.io/raspbuggy/</id><author><name><![CDATA[CERN Micro Club Robotics]]></name><email><![CDATA[cmc.robotics@cern.ch]]></email></author><generator uri="http://sysgears.com/grain/">Grain</generator><entry><title type="html"><![CDATA[A fully working programming environment for Lego Mindstorms NXT]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/05/31/a-fully-working-programming-environment-for-lego-mindstorms-nxt/"/><updated>2015-05-31T23:14:54+02:00</updated><id>/blog/2015/05/31/a-fully-working-programming-environment-for-lego-mindstorms-nxt/</id><content type="html"><![CDATA[<p>Finally, the programming environment is fully working for Lego Mindstorms NXT !
-<img src="/raspbuggy/images/2015-05-31-webide-7cbd246be344a024612a8f410796bb46.jpg"></p>
-<!--more-->
-<p>The web-based programming environment supports :</p>
-<ul>
-<li>On-the-fly Python code generation (any change in the Blockly programming area is immediately reflected in Python)</li>
-<li>A script preview panel (to see what the generated script looks like before execution)</li>
-<li>Script execution monitoring (to know whether your script is still running)</li>
-<li>Asynchronous console output (so that your program can provide debug outputs during execution)</li>
-<li>and a very pleasant Bootstrap 3 based web user interface, as you can judge from the included screenshots.</li>
-</ul>
-<p>The generated script will currently only work for the Drivar Lego Mindstorms NXT layer, but it will be
-very easily adapted to work with the Pimoroni Explorer HAT, or even a custom adapter board if we happen to come up with one.</p>
-<p><img src="/raspbuggy/images/2015-05-31-webide-1-20b30a3e4f554537bd05e503e98927ba.jpg"></p>
-]]></content></entry><entry><title type="html"><![CDATA[A Lego Mindstorm hardware layer]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/18/a-lego-mindstorm-hardware-layer/"/><updated>2015-05-16T13:27:12+02:00</updated><id>/blog/2015/04/18/a-lego-mindstorm-hardware-layer/</id><content type="html"><![CDATA[<p>The Raspbuggy platform is destined to be an open educational programming platform. It is designed to adapt to a
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title><![CDATA[Raspbuggy]]></title><link href="http://cmcrobotics.github.io/raspbuggy/categories/lego-mindstorm/atom.xml" rel="self"/><link href="http://cmcrobotics.github.io/raspbuggy/"/><updated>2015-05-28T14:07:06+02:00</updated><id>http://cmcrobotics.github.io/raspbuggy/</id><author><name><![CDATA[CERN Micro Club Robotics]]></name><email><![CDATA[cmc.robotics@cern.ch]]></email></author><generator uri="http://sysgears.com/grain/">Grain</generator><entry><title type="html"><![CDATA[A Lego Mindstorm hardware layer]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/18/a-lego-mindstorm-hardware-layer/"/><updated>2015-05-28T14:07:06+02:00</updated><id>/blog/2015/04/18/a-lego-mindstorm-hardware-layer/</id><content type="html"><![CDATA[<p>The Raspbuggy platform is destined to be an open educational programming platform. It is designed to adapt to a
 large array of hardware layers, so that it can evolve through time.</p>
 <p>In order to cope with different hardware platforms, it relies on a hardware abstraction layer called "Drivar".</p>
 <!--more-->
