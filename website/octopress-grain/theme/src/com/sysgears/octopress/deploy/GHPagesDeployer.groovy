@@ -67,7 +67,9 @@ class GHPagesDeployer {
 
         def filesToBeDeleted = getListOfDeletedFiles(ant, cacheDeployDir)
 
-        def continueDeploy = filesToBeDeleted.isEmpty() ?: askContinueDeploy(ant, filesToBeDeleted)
+        // Override the "continue deploy" prompt to automate the build
+        def continueDeploy = true
+        //def continueDeploy = filesToBeDeleted.isEmpty() ?: askContinueDeploy(ant, filesToBeDeleted)
 
         ant.sequential {
             if (continueDeploy) {

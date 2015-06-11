@@ -7,7 +7,7 @@ Created on Mar 18, 2015
 
 import nxt.locator
 from nxt.motor import Motor,PORT_A,PORT_B,PORT_C
-from nxt.sensor import Ultrasonic,PORT_1,PORT_2,PORT_3,PORT_4
+from nxt.sensor import Ultrasonic,Light,PORT_1,PORT_2,PORT_3,PORT_4
 
 from Drivar import Drivar
 import time
@@ -19,6 +19,7 @@ class DrivarNxt(Drivar):
         self.m_block = None
         self.m_leftMotor = None
         self.m_rightMotor = None
+        self.m_penMotor = None
         self.m_ultrasonicSensor = None
         self.m_lightSensor = None
         self.m_moving = False
@@ -28,8 +29,9 @@ class DrivarNxt(Drivar):
         self.m_block = nxt.locator.find_one_brick()
         self.m_leftMotor = Motor(self.m_block, PORT_A)
         self.m_rightMotor = Motor(self.m_block, PORT_C)
+        self.m_penMotor = Motor(self.m_block, PORT_B)
         self.m_ultrasonicSensor = Ultrasonic(self.m_block, PORT_4)
-        #self.m_lightSensor = LightSensor(self.m_block, PORT_3)
+        self.m_lightSensor = Light(self.m_block, PORT_3)
         self.m_initialized = True
         
 
@@ -98,11 +100,10 @@ class DrivarNxt(Drivar):
             return False
     
     def rotatePen(self, angle):
-        pass
+        self.m_penMotor.turn(70, angle)
 
     def getReflectivityMeasurement(self):
-        return 0
-        #return self.m_lightSensor.get_sample()
+        return self.m_lightSensor.get_sample()
         
     def wait(self, milliseconds):
         time.sleep(milliseconds/1000)

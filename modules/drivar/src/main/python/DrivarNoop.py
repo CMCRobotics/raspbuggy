@@ -95,10 +95,10 @@ class DrivarNoop(Drivar):
             return False
     
     def rotatePen(self, angle):
-        pass
+        self.m_logger.info("Drivar : Rotating the pen by %d degrees", angle)
 
     def getReflectivityMeasurement(self):
-        return 0
+        return 150
         #return self.m_lightSensor.get_sample()
         
     def wait(self, milliseconds):
