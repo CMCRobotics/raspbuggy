@@ -41,9 +41,12 @@ class ScriptMonitor(object):
         try:
             if(self.m_processInitialized and self.m_process.poll() == None):
                 self.m_process.terminate()
+                self.m_stdoutQueue.put("* Script execution aborted *")
             self.m_processInitialized = False
+            return True
         except:
             print "Raspbuggy script could not be terminated : ", sys.exc_info()[0]
+            return False
  
     def isRunning(self):
         return (self.m_processInitialized and self.m_process.poll() == None)
@@ -132,9 +135,10 @@ class RaspbuggyService(object):
     @cherrypy.tools.json_in()
     @cherrypy.tools.json_out()
     def abort(self):
-        result = 0;
+        result = False;
         if (self.m_scriptMonitor != None):
-            self.m_scriptMonitor.abort()
+            print "Aborting script execution"
+            result = self.m_scriptMonitor.abort()
         return {"result":result}
 
     @cherrypy.expose
@@ -172,7 +176,6 @@ if __name__ == '__main__':
         WEBAPP_ROOT = os.getenv('RASPBUGGY_WEBAPP_ROOT',os.getcwd()+"/src/main/webapp/")
         BLOCKLY_ROOT = os.getenv('BLOCKLY_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/blockly/b35c0fbfa2")
         BOOTSTRAP_ROOT = os.getenv('BOOTSTRAP_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/bootstrap/3.3.4")
-        LADDA_BOOTSTRAP_ROOT = os.getenv('LADDA_BOOTSTRAP_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/ladda-bootstrap/0.1.0")
         JQUERY_ROOT = os.getenv('JQUERY_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/jquery/1.9.1")
         cherrypy.server.socket_host = '0.0.0.0'
         accessLogger = logging.getLogger('cherrypy.access')
@@ -199,11 +202,6 @@ if __name__ == '__main__':
                   {
                    'tools.staticdir.on': True,
                    'tools.staticdir.dir': os.path.abspath(BOOTSTRAP_ROOT)
-                  },
-                  '/ladda-bootstrap':
-                  {
-                   'tools.staticdir.on': True,
-                   'tools.staticdir.dir': os.path.abspath(LADDA_BOOTSTRAP_ROOT)
                   },
                   '/jquery':
                   {

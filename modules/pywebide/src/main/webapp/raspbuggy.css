@@ -1,0 +1,49 @@
+    html, body {
+      height: 100%;
+    }
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .raspbuggy-hidden{
+        visibility:hidden;
+    }
+    
+    .raspbuggy-textarea{
+        border: 0px solid;
+    }
+    
+    a.raspbuggy-status-label{
+        color: white !important;
+        cursor: initial !important;
+    }
+    a.raspbuggy-status-label:hover{
+        color: white !important;
+    }
+    .fa-spin-custom, .glyphicon-spin {
+        -webkit-animation: spin 1500ms infinite linear;
+        animation: spin 1500ms infinite linear;
+    }
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+        }
+    }
+    @keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+        }
+    }
+
