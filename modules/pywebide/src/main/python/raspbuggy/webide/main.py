@@ -32,30 +32,26 @@ class ScriptMonitor(object):
         if(self.m_process.pid != None and self.m_process.poll() == None):
             print "Starting raspbuggy script process output polling..."
             self.m_stdoutQueue = Queue.Queue()
-            self.m_stderrQueue = Queue.Queue()
             self.m_stdoutReader = AsynchronousFileReader(self.m_process.stdout, self.m_stdoutQueue)
             self.m_stdoutReader.start()
         else:
             print "Raspbuggy script process startup failed."
             
-        
-        
     def abort(self):
-        print "Starting raspbuggy script process output polling..."
-        if(self.m_processInitialized and self.m_process.poll() == None):
-            self.m_process.terminate()
-        self.m_processInitialized = False
+        try:
+            if(self.m_processInitialized and self.m_process.poll() == None):
+                self.m_process.terminate()
+            self.m_processInitialized = False
+        except:
+            print "Raspbuggy script could not be terminated : ", sys.exc_info()[0]
  
     def isRunning(self):
         return (self.m_processInitialized and self.m_process.poll() == None)
         
     def getStdoutQueue(self):
         return self.m_stdoutQueue
-        
-    def getStderrQueue(self):
-        return self.m_stderrQueue
-        
-    
+
+
 class AsynchronousFileReader(threading.Thread):
     '''
     Helper class to implement asynchronous reading of a file
@@ -132,13 +128,14 @@ class RaspbuggyService(object):
             else:
                 return {"success":False, "message": "Could not start up script"}
         
-        
     @cherrypy.expose
     @cherrypy.tools.json_in()
     @cherrypy.tools.json_out()
     def abort(self):
-        return {"result":1}
-    
+        result = 0;
+        if (self.m_scriptMonitor != None):
+            self.m_scriptMonitor.abort()
+        return {"result":result}
 
     @cherrypy.expose
     @cherrypy.tools.json_out()
@@ -154,35 +151,65 @@ class RaspbuggyService(object):
                     pass
         return  {"tail": result}
 
-
+    @cherrypy.expose
+    @cherrypy.tools.json_out()
+    def shutdown(self):
+        result = -1
+        try:
+            print "Shutting down Raspbuggy service..."
+            if (self.m_scriptMonitor != None and self.m_scriptMonitor.isRunning()):
+                self.m_scriptMonitor.abort()
+            print "Raspbuggy service shutdown complete."
+            result = 0
+        except:
+            print "Failed to shutdown Raspbuggy service : ", sys.exc_info()[0]
+        return  {"result": result}
+        
+        
 if __name__ == '__main__':
-    WEBAPP_ROOT = os.getenv('RASPBUGGY_WEBAPP_ROOT',os.getcwd()+"/src/main/webapp")
-    BLOCKLY_ROOT = os.getenv('BLOCKLY_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/blockly/b35c0fbfa2")
-    BOOTSTRAP_ROOT = os.getenv('BOOTSTRAP_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/bootstrap/3.3.4")
-    JQUERY_ROOT = os.getenv('JQUERY_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/jquery/1.9.1")
-    cherrypy.server.socket_host = '0.0.0.0'
-    accessLogger = logging.getLogger('cherrypy.access')
-    accessLogger.setLevel(logging.WARNING)
-    cherrypy.quickstart(RaspbuggyService(), "/", 
-        {
-              '/':
-              {
-               'tools.staticdir.on': True,
-               'tools.staticdir.dir': os.path.abspath(WEBAPP_ROOT)
-              },
-              '/blockly':
-              {
-               'tools.staticdir.on': True,
-               'tools.staticdir.dir': os.path.abspath(BLOCKLY_ROOT)
-              },
-              '/bootstrap':
-              {
-               'tools.staticdir.on': True,
-               'tools.staticdir.dir': os.path.abspath(BOOTSTRAP_ROOT)
-              },
-              '/jquery':
-              {
-               'tools.staticdir.on': True,
-               'tools.staticdir.dir': os.path.abspath(JQUERY_ROOT)
-              }                           
-        })
+    raspbuggyService = RaspbuggyService()
+    try:
+        WEBAPP_ROOT = os.getenv('RASPBUGGY_WEBAPP_ROOT',os.getcwd()+"/src/main/webapp")
+        BLOCKLY_ROOT = os.getenv('BLOCKLY_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/blockly/b35c0fbfa2")
+        BOOTSTRAP_ROOT = os.getenv('BOOTSTRAP_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/bootstrap/3.3.4")
+        LADDA_BOOTSTRAP_ROOT = os.getenv('LADDA_BOOTSTRAP_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/ladda-bootstrap/0.1.0")
+        JQUERY_ROOT = os.getenv('JQUERY_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/jquery/1.9.1")
+        cherrypy.server.socket_host = '0.0.0.0'
+        accessLogger = logging.getLogger('cherrypy.access')
+        accessLogger.setLevel(logging.WARNING)
+        
+        # Registering a cherrypy stop handler to force the service to
+        # stop any script execution or threads
+        cherrypy.engine.subscribe('stop', raspbuggyService.shutdown)
+        
+        cherrypy.quickstart(raspbuggyService, "/", 
+            {
+                  '/':
+                  {
+                   'tools.staticdir.on': True,
+                   'tools.staticdir.dir': os.path.abspath(WEBAPP_ROOT)
+                  },
+                  '/blockly':
+                  {
+                   'tools.staticdir.on': True,
+                   'tools.staticdir.dir': os.path.abspath(BLOCKLY_ROOT)
+                  },
+                  '/bootstrap':
+                  {
+                   'tools.staticdir.on': True,
+                   'tools.staticdir.dir': os.path.abspath(BOOTSTRAP_ROOT)
+                  },
+                  '/ladda-bootstrap':
+                  {
+                   'tools.staticdir.on': True,
+                   'tools.staticdir.dir': os.path.abspath(LADDA_BOOTSTRAP_ROOT)
+                  },
+                  '/jquery':
+                  {
+                   'tools.staticdir.on': True,
+                   'tools.staticdir.dir': os.path.abspath(JQUERY_ROOT)
+                  }                           
+            })
+    except KeyboardInterrupt:
+        raspbuggyService.shutdown()
+        cherrypy.engine.exit()

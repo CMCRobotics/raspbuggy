@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="favicon.png"/>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/ladda-bootstrap/ladda-themeless.min.css"/>
     <script src="js/raspbuggy.service.js"></script>
   <style>
     html, body {
@@ -24,15 +25,42 @@
         border: 0px solid;
     }
     
+    a.raspbuggy-status-label{
+        color: white !important;
+        cursor: initial !important;
+    }
+    a.raspbuggy-status-label:hover{
+        color: white !important;
+    }
+    .fa-spin-custom, .glyphicon-spin {
+        -webkit-animation: spin 1000ms infinite linear;
+        animation: spin 1000ms infinite linear;
+    }
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+        }
+    }
+    @keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+        }
+    }    
   </style>
  </head>
  
  <!--
     TO DO : 
-    * (!) Implement ABORT script support
-    * (>) Disable the RUN button while the code is running
-    * (+) Implement a timer to count the number of seconds of execution
-    * (+) Implement support for script file manager (with service-based storage - save, save as, delete, rename)
     * (?!) Blockly : investigate disconnected mode (mp3 sounds, images like inverted quotes... are unavailable offline)
   -->
  
@@ -49,14 +77,14 @@
         </div>
           <div id="navbar">
             <ul class="nav navbar-nav">
-              <li><a href="#" onClick="runCode()"><span id="raspbuggy-script-action-icon" class="glyphicon glyphicon-play" aria-hidden="true"></span> <span id="raspbuggy-script-action-label">Run</span></a></li>
-              <li><a href="#">Current Status : <b><span id="raspbuggy-status-label">Stopped</span></b> <span id="raspbuggy-status-icon" class="glyphicon glyphicon-stop" aria-hidden="true"></span></a></li>
+              <li><a id="raspbuggy-script-action-button" href="#" onClick="runCode()"><span id="raspbuggy-script-action-icon" class="glyphicon glyphicon-play" aria-hidden="true"></span> <span class="ladda-label" id="raspbuggy-script-action-label">Run</span></a></li>
+              <li><a href="#" class="raspbuggy-status-label">Current Status : <b><span id="raspbuggy-status-label">Stopped</span></b> <span id="raspbuggy-status-icon" class="glyphicon glyphicon-stop" aria-hidden="true"></span></a></li>
             </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Open...</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> Save as...</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Settings</a></li>
+            <!--li><a href="#">Help</a></li-->
           </ul>
          </div>
       </div>
@@ -79,7 +107,6 @@
                   <div class="tab-pane active" id="console">
                       <div class="btn-group btn-group-sm" role="group" style="padding:5px;background-color:white;width:100%;border-top-right-radius: 4px;">
                           <a href="#"  onclick="clearConsole()" class="btn btn-default"><span class="glyphicon glyphicon-ban-circle"></span> Clear</a>
-                          <!--a href="#" class="btn btn-default">Filter</a-->
                         </div>
                       <div id="raspbuggy-console-panel" class="panel panel-default" style="border-top-left-radius: 0px;border-top-right-radius: 0px;">
                          <div class="panel-body" style="padding:0px">
@@ -100,23 +127,33 @@
   </div>
   
   <script src="/jquery/jquery.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script>
-      function blocklyLoaded(blockly) {
-        // Called once Blockly is fully loaded.
-        window.Blockly = blockly;
-        window.setTimeout(BlocklyStorage.restoreBlocks, 0);
-        BlocklyStorage.backupOnUnload();
-        blockly.addChangeListener(function (){
-           window.Blockly.Python.INFINITE_LOOP_TRAP = null;
-           var code = raspbuggy.getCompleteScriptCode(window.Blockly.Python.workspaceToCode());
-           $("#raspbuggy-script-preview-textarea").val(code);
-        });
-      }
-      </script>
+  <script src="/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/ladda-bootstrap/spin.min.js"></script>
+  <script src="/ladda-bootstrap/ladda.min.js"></script>
+  
+  
+  <script>
+    function blocklyLoaded(blockly) {
+      // Called once Blockly is fully loaded, provides a window-wide access to
+      // its functions.
+      window.Blockly = blockly;
+      
+      // Enable auto-save into browser local storage
+      window.setTimeout(BlocklyStorage.restoreBlocks, 0);
+      BlocklyStorage.backupOnUnload();
+      
+      // Add a change listener to update the generated python script
+      // upon each code block change
+      blockly.addChangeListener(function (){
+         window.Blockly.Python.INFINITE_LOOP_TRAP = null;
+         var code = raspbuggy.getCompleteScriptCode(window.Blockly.Python.workspaceToCode());
+         $("#raspbuggy-script-preview-textarea").val(code);
+      });
+    }
+    </script>
     
-    <script src="js/blockly_storage.js"></script>
-    <script type="text/javascript">
+  <script src="js/blockly_storage.js"></script>
+  <script type="text/javascript">
     
     function windowDimensions() { 
         var myWidth = 0, myHeight = 0;
@@ -142,21 +179,25 @@
         $("#raspbuggy-status-icon").removeClass("glyphicon-stop");
         $("#raspbuggy-status-icon").removeClass("glyphicon-play");
         $("#raspbuggy-status-icon").removeClass("glyphicon-question-sign");
-        
         $("#raspbuggy-script-action-icon").removeClass("glyphicon-stop");
         $("#raspbuggy-script-action-icon").removeClass("glyphicon-play");
+        
         if(statusUpdate.running==-3){
           // Status is unknown, it could not be queried from the raspbuggy service
           $("#raspbuggy-status-label").text("Unknown");
+          $("#raspbuggy-status-icon").removeClass("glyphicon-spin");
           $("#raspbuggy-status-icon").addClass("glyphicon-question-sign");
         }else if(statusUpdate.running){
           $("#raspbuggy-status-label").text("Running");
           $("#raspbuggy-script-action-label").text("Stop");
-          $("#raspbuggy-status-icon").addClass("glyphicon-play");
+          //$("#raspbuggy-status-icon").addClass("glyphicon-play");
+          $("#raspbuggy-status-icon").addClass("glyphicon-refresh");
+          $("#raspbuggy-status-icon").addClass("glyphicon-spin");
           $("#raspbuggy-script-action-icon").addClass("glyphicon-stop");
         }else if(!statusUpdate.running){
           $("#raspbuggy-status-label").text("Stopped");
           $("#raspbuggy-script-action-label").text("Run");
+          $("#raspbuggy-status-icon").removeClass("glyphicon-spin");
           $("#raspbuggy-status-icon").addClass("glyphicon-stop");
           $("#raspbuggy-script-action-icon").addClass("glyphicon-play");
  
@@ -166,7 +207,6 @@
       raspbuggy.setScriptOutputCallback(function(linesArray){
         $.each(linesArray, function(line, value){
             try{
-               // console.log("Script:"+value);
                $("#raspbuggy-console-textarea").append(value);
             }catch(err){
                 console.log("Could not update service status : "+err);
@@ -180,6 +220,7 @@
       window.runCode = function(){
         window.Blockly.Python.INFINITE_LOOP_TRAP = null;
         var code = raspbuggy.getCompleteScriptCode(window.Blockly.Python.workspaceToCode());
+        window.clearConsole();
         raspbuggy.executeScript(code);
       }
       window.clearConsole = function(){

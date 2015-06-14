@@ -26,7 +26,12 @@
             <artifactId>jquery</artifactId>
             <version>1.9.1</version>
         </dependency>
-</dependencies>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>ladda-bootstrap</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+  </dependencies>
 
   <build>
     <plugins>
@@ -63,6 +68,13 @@
                    <type>jar</type>
                    <overWrite>true</overWrite>
                    <includes>META-INF/resources/webjars/jquery/**/*.*</includes>
+                 </artifactItem>
+                 <artifactItem>
+                   <groupId>org.webjars</groupId>
+                   <artifactId>ladda-bootstrap</artifactId>
+                   <type>jar</type>
+                   <overWrite>true</overWrite>
+                   <includes>META-INF/resources/webjars/ladda-bootstrap/**/*.*</includes>
                  </artifactItem>
                </artifactItems>
                <outputDirectory>${project.build.directory}/webjars</outputDirectory>
