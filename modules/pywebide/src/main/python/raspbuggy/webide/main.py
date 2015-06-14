@@ -169,7 +169,7 @@ class RaspbuggyService(object):
 if __name__ == '__main__':
     raspbuggyService = RaspbuggyService()
     try:
-        WEBAPP_ROOT = os.getenv('RASPBUGGY_WEBAPP_ROOT',os.getcwd()+"/src/main/webapp")
+        WEBAPP_ROOT = os.getenv('RASPBUGGY_WEBAPP_ROOT',os.getcwd()+"/src/main/webapp/")
         BLOCKLY_ROOT = os.getenv('BLOCKLY_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/blockly/b35c0fbfa2")
         BOOTSTRAP_ROOT = os.getenv('BOOTSTRAP_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/bootstrap/3.3.4")
         LADDA_BOOTSTRAP_ROOT = os.getenv('LADDA_BOOTSTRAP_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/ladda-bootstrap/0.1.0")
@@ -187,7 +187,8 @@ if __name__ == '__main__':
                   '/':
                   {
                    'tools.staticdir.on': True,
-                   'tools.staticdir.dir': os.path.abspath(WEBAPP_ROOT)
+                   'tools.staticdir.dir': os.path.abspath(WEBAPP_ROOT),
+                   'tools.staticdir.index': 'index.html'
                   },
                   '/blockly':
                   {
