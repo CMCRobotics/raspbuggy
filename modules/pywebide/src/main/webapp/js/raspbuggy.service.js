@@ -1,6 +1,7 @@
 function Raspbuggy() {
   this.statusTimer = null;
   this.statusUpdateCallbacks = [];
+  this.m_abortScriptCallback = null;
   this.m_scriptOutputCallback = null;
   this.SCRIPT_PREFIX = "from Drivar import Drivar\nfrom DrivarNxt import DrivarNxt\ndrivar = DrivarNxt()\ndrivar.initialize()\n\n"
 //  this.SCRIPT_PREFIX = "from Drivar import Drivar\nfrom DrivarNoop import DrivarNoop\ndrivar = DrivarNoop()\nimport logging\nlogging.basicConfig(level=logging.DEBUG)\ndrivar.initialize()\n\n"
@@ -18,6 +19,9 @@ Raspbuggy.prototype.addStatusUpdateCallback = function(listener){
 
 Raspbuggy.prototype.setScriptOutputCallback = function(listener){
     this.m_scriptOutputCallback = listener;
+};
+Raspbuggy.prototype.setAbortScriptCallback = function(listener){
+    this.m_abortScriptCallback = listener;
 };
 
 Raspbuggy.prototype.getCompleteScriptCode = function(inputScript){
@@ -72,6 +76,17 @@ Raspbuggy.prototype.tailStdOut= function() {
   });
 };
 
+Raspbuggy.prototype.abortScript= function() {
+  var thisRaspbuggy = this;
+  $.getJSON( "/abort", function(reply) {
+    if(reply.result && thisRaspbuggy.m_abortScriptCallback){
+        thisRaspbuggy.m_abortScriptCallback(reply);
+    }
+  })
+  .fail(function(httpReply) {
+    console.log( "Error - Could not abort raspbuggy script : "+httpReply.statusText+" ("+httpReply.status+")" );
+  });
+};
 
 Raspbuggy.prototype.executeScript= function(scriptContents) {
   var thisRaspbuggy = this;

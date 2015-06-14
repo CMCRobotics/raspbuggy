@@ -5,34 +5,12 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="favicon.png"/>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="raspbuggy.css"/>
     <script src="js/raspbuggy.service.js"></script>
-  <style>
-    html, body {
-      height: 100%;
-    }
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-    .raspbuggy-hidden{
-        visibility:hidden;
-    }
-    
-    .raspbuggy-textarea{
-        border: 0px solid;
-    }
-    
-  </style>
  </head>
  
  <!--
     TO DO : 
-    * (!) Implement ABORT script support
-    * (>) Disable the RUN button while the code is running
-    * (+) Implement a timer to count the number of seconds of execution
-    * (+) Implement support for script file manager (with service-based storage - save, save as, delete, rename)
     * (?!) Blockly : investigate disconnected mode (mp3 sounds, images like inverted quotes... are unavailable offline)
   -->
  
@@ -49,14 +27,14 @@
         </div>
           <div id="navbar">
             <ul class="nav navbar-nav">
-              <li><a href="#" onClick="runCode()"><span id="raspbuggy-script-action-icon" class="glyphicon glyphicon-play" aria-hidden="true"></span> <span id="raspbuggy-script-action-label">Run</span></a></li>
-              <li><a href="#">Current Status : <b><span id="raspbuggy-status-label">Stopped</span></b> <span id="raspbuggy-status-icon" class="glyphicon glyphicon-stop" aria-hidden="true"></span></a></li>
+              <li><a id="raspbuggy-script-action-button" href="#"><span id="raspbuggy-script-action-icon" class="glyphicon glyphicon-play" aria-hidden="true"></span> <span class="ladda-label" id="raspbuggy-script-action-label">Run</span></a></li>
+              <li><a href="#" class="raspbuggy-status-label">Current Status : <b><span id="raspbuggy-status-label">Stopped</span></b> <span id="raspbuggy-status-icon" class="glyphicon glyphicon-stop" aria-hidden="true"></span></a></li>
             </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Open...</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> Save as...</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Settings</a></li>
+            <!--li><a href="#">Help</a></li-->
           </ul>
          </div>
       </div>
@@ -79,7 +57,6 @@
                   <div class="tab-pane active" id="console">
                       <div class="btn-group btn-group-sm" role="group" style="padding:5px;background-color:white;width:100%;border-top-right-radius: 4px;">
                           <a href="#"  onclick="clearConsole()" class="btn btn-default"><span class="glyphicon glyphicon-ban-circle"></span> Clear</a>
-                          <!--a href="#" class="btn btn-default">Filter</a-->
                         </div>
                       <div id="raspbuggy-console-panel" class="panel panel-default" style="border-top-left-radius: 0px;border-top-right-radius: 0px;">
                          <div class="panel-body" style="padding:0px">
@@ -100,25 +77,32 @@
   </div>
   
   <script src="/jquery/jquery.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script>
-      function blocklyLoaded(blockly) {
-        // Called once Blockly is fully loaded.
-        window.Blockly = blockly;
-        window.setTimeout(BlocklyStorage.restoreBlocks, 0);
-        BlocklyStorage.backupOnUnload();
-        blockly.addChangeListener(function (){
-           window.Blockly.Python.INFINITE_LOOP_TRAP = null;
-           var code = raspbuggy.getCompleteScriptCode(window.Blockly.Python.workspaceToCode());
-           $("#raspbuggy-script-preview-textarea").val(code);
-        });
-      }
-      </script>
+  <script src="/bootstrap/js/bootstrap.min.js"></script>
+  
+  <script>
+    function blocklyLoaded(blockly) {
+      // Called once Blockly is fully loaded, provides a window-wide access to
+      // its functions.
+      window.Blockly = blockly;
+      
+      // Enable auto-save into browser local storage
+      window.setTimeout(BlocklyStorage.restoreBlocks, 0);
+      BlocklyStorage.backupOnUnload();
+      
+      // Add a change listener to update the generated python script
+      // upon each code block change
+      blockly.addChangeListener(function (){
+         window.Blockly.Python.INFINITE_LOOP_TRAP = null;
+         var code = raspbuggy.getCompleteScriptCode(window.Blockly.Python.workspaceToCode());
+         $("#raspbuggy-script-preview-textarea").val(code);
+      });
+    }
+    </script>
     
-    <script src="js/blockly_storage.js"></script>
-    <script type="text/javascript">
+  <script src="js/blockly_storage.js"></script>
+  <script type="text/javascript">
     
-    function windowDimensions() { 
+    function getWindowDimensions() { 
         var myWidth = 0, myHeight = 0;
         if( typeof( window.innerWidth ) == 'number' ) {
             myWidth = window.innerWidth;
@@ -130,43 +114,51 @@
     }
     
     $(document).ready(function(){
-      var dim = windowDimensions();
+      var dim = getWindowDimensions();
       // Leave space for the top navigation bar
       $('#blocklyFrame').height((dim[1]-80) + "px");
       // Leave space for the top navigation bar
-      $('#raspbuggy-console-textarea').height((dim[1]-168) + "px");
-      $('#raspbuggy-script-preview-textarea').height((dim[1]-128) + "px");
+      $('#raspbuggy-console-textarea').height((dim[1]-167) + "px");
+      $('#raspbuggy-script-preview-textarea').height((dim[1]-127) + "px");
       
       // Register Raspbuggy execution status listener
       raspbuggy.addStatusUpdateCallback(function(statusUpdate){
         $("#raspbuggy-status-icon").removeClass("glyphicon-stop");
         $("#raspbuggy-status-icon").removeClass("glyphicon-play");
         $("#raspbuggy-status-icon").removeClass("glyphicon-question-sign");
-        
         $("#raspbuggy-script-action-icon").removeClass("glyphicon-stop");
         $("#raspbuggy-script-action-icon").removeClass("glyphicon-play");
+        
         if(statusUpdate.running==-3){
           // Status is unknown, it could not be queried from the raspbuggy service
           $("#raspbuggy-status-label").text("Unknown");
+          $("#raspbuggy-status-icon").removeClass("glyphicon-spin");
+          $("#raspbuggy-script-action-icon").addClass("glyphicon-play");
           $("#raspbuggy-status-icon").addClass("glyphicon-question-sign");
+          $("#raspbuggy-script-action-button").off("click");
+          $("#raspbuggy-script-action-button").on("click",cannotRunCode);
         }else if(statusUpdate.running){
           $("#raspbuggy-status-label").text("Running");
           $("#raspbuggy-script-action-label").text("Stop");
-          $("#raspbuggy-status-icon").addClass("glyphicon-play");
+          $("#raspbuggy-status-icon").addClass("glyphicon-refresh");
+          $("#raspbuggy-status-icon").addClass("glyphicon-spin");
           $("#raspbuggy-script-action-icon").addClass("glyphicon-stop");
+          $("#raspbuggy-script-action-button").off("click");
+          $("#raspbuggy-script-action-button").on("click",abortCode);
         }else if(!statusUpdate.running){
           $("#raspbuggy-status-label").text("Stopped");
           $("#raspbuggy-script-action-label").text("Run");
+          $("#raspbuggy-status-icon").removeClass("glyphicon-spin");
           $("#raspbuggy-status-icon").addClass("glyphicon-stop");
           $("#raspbuggy-script-action-icon").addClass("glyphicon-play");
- 
+          $("#raspbuggy-script-action-button").off("click");
+          $("#raspbuggy-script-action-button").on("click",runCode);
         }
       });
       
       raspbuggy.setScriptOutputCallback(function(linesArray){
         $.each(linesArray, function(line, value){
             try{
-               // console.log("Script:"+value);
                $("#raspbuggy-console-textarea").append(value);
             }catch(err){
                 console.log("Could not update service status : "+err);
@@ -174,17 +166,32 @@
         });
       
       });
-   
-      raspbuggy.start();
       
+      raspbuggy.setAbortScriptCallback(function(reply){
+        if(!reply.result){
+           window.alert("Could not abort script execution !");
+        }
+      
+      });
+   
       window.runCode = function(){
         window.Blockly.Python.INFINITE_LOOP_TRAP = null;
         var code = raspbuggy.getCompleteScriptCode(window.Blockly.Python.workspaceToCode());
+        window.clearConsole();
         raspbuggy.executeScript(code);
+      }
+      window.abortCode = function(){
+        raspbuggy.abortScript();
       }
       window.clearConsole = function(){
         $("#raspbuggy-console-textarea").text("");
       }
+      window.cannotRunCode = function(){
+        window.alert("Cannot execute code : Raspbuggy server unreachable !");
+      }
+      
+      raspbuggy.start();
+      
       
     });
     

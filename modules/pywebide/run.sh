@@ -1,1 +1,1 @@
-PYTHONPATH=src/main/python python src/main/python/raspbuggy/webide/main.py
+PYTHONPATH=src/main/python:../drivar/src/main/python python src/main/python/raspbuggy/webide/main.py
