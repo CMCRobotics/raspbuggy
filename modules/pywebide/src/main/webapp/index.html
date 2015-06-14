@@ -133,8 +133,10 @@
           // Status is unknown, it could not be queried from the raspbuggy service
           $("#raspbuggy-status-label").text("Unknown");
           $("#raspbuggy-status-icon").removeClass("glyphicon-spin");
+          $("#raspbuggy-script-action-icon").addClass("glyphicon-play");
           $("#raspbuggy-status-icon").addClass("glyphicon-question-sign");
-       //   $("#raspbuggy-script-action-button").click(cannotRunCode);
+          $("#raspbuggy-script-action-button").off("click");
+          $("#raspbuggy-script-action-button").on("click",cannotRunCode);
         }else if(statusUpdate.running){
           $("#raspbuggy-status-label").text("Running");
           $("#raspbuggy-script-action-label").text("Stop");
