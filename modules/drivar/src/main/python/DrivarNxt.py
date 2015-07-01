@@ -100,9 +100,14 @@ class DrivarNxt(Drivar):
             return False
     
     def rotatePen(self, angle):
-        self.m_penMotor.turn(70, angle)
+        power = 70
+        if angle < 0:
+            angle = -1 * angle
+            power = -70
+        self.m_penMotor.turn(power, angle)
 
     def getReflectivityMeasurement(self):
+        self.m_lightSensor.set_illuminated(True)
         return self.m_lightSensor.get_sample()
         
     def wait(self, milliseconds):
