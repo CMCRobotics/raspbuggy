@@ -1,4 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title><![CDATA[Raspbuggy]]></title><link href="http://cmcrobotics.github.io/raspbuggy/atom.xml" rel="self"/><link href="http://cmcrobotics.github.io/raspbuggy/"/><updated>2015-06-04T16:32:21+02:00</updated><id>http://cmcrobotics.github.io/raspbuggy/</id><author><name><![CDATA[CERN Micro Club Robotics]]></name><email><![CDATA[cmc.robotics@cern.ch]]></email></author><generator uri="http://sysgears.com/grain/">Grain</generator><entry><title type="html"><![CDATA[Integration tests with Lego Mindstorms NXT]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/06/02/integration-tests-with-lego-mindstorms-nxt/"/><updated>2015-06-04T16:32:21+02:00</updated><id>/blog/2015/06/02/integration-tests-with-lego-mindstorms-nxt/</id><content type="html"><![CDATA[<p>Successful integration tests... but we do need an ABORT SCRIPT button !</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title><![CDATA[Raspbuggy]]></title><link href="http://cmcrobotics.github.io/raspbuggy/atom.xml" rel="self"/><link href="http://cmcrobotics.github.io/raspbuggy/"/><updated>2015-07-02T00:29:13+02:00</updated><id>http://cmcrobotics.github.io/raspbuggy/</id><author><name><![CDATA[CERN Micro Club Robotics]]></name><email><![CDATA[cmc.robotics@cern.ch]]></email></author><generator uri="http://sysgears.com/grain/">Grain</generator><entry><title type="html"><![CDATA[Our first Robotics challenge at CERN IdeaSquare]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/06/18/our-first-robotics-challenge-at-cern-ideasquare/"/><updated>2015-07-02T00:29:13+02:00</updated><id>/blog/2015/06/18/our-first-robotics-challenge-at-cern-ideasquare/</id><content type="html"><![CDATA[<p>We've held our first Raspbuggy Robotics programming competition at the CERN IdeaSquare innovation space, with great success and
+<strong>invaluable support from the IdeaSquare team and the CERN Micro Club</strong>.</p>
+<p>What do you get when you gather fifteen enthusiastic engineers and physicists and give them a very fun Robotics challenge to complete ?
+<img src="/raspbuggy/images/2015-06-17-rpi-3a86e5f3d4e9c4971c27e16e1774c7ef.jpg"></p>
+<!--more-->
+<p>The three teams (15 participants in total) were handed :</p>
+<ul>
+<li>a LegoMindstorm NXT robot (complete with proximity sensor, reflectivity sensor and a motorised non-permanent marker)</li>
+<li>a Raspberry Pi pre-loaded with the Raspbuggy environment</li>
+<li>and a USB battery pack.</li>
+</ul>
+<p>Their task ? Reproduce a given black and white 8 x 8 pattern on a piece of paper, then successfully exit a maze in the shortest amount of time possible.
+Under ten minutes, and with only two attempts at their disposal to score the highest.</p>
+<p>How did they fare ? Hum, as you can tell from the following videos, with mixed results, with certain very interesting strategies (we're grateful we used <strong>non-permanent</strong> markers, because that floor got stabbed quite a few times).</p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLjle9mWg0xb8aiG1S6l-NOLWyFN2foJzj" frameborder="0" allowfullscreen></iframe></p>
+<p>The Raspbuggy platform fulfilled its duties quite well, without any bugs reported and only one incident involving a NXT Mindstorm block entering a furious loop during one of the test trials (cause still undetermined, but most likely the Raspberry Pi's USB power bank running out of juice, leaving the Mindstorm NXT block hanging).</p>
+<p>From here on, we need to consolidate the hardware platform <strong>sans Lego Mindstorms</strong> and organise... well.. another competition at CERN !</p>
+<p><img src="/raspbuggy/images/2015-06-17-james-79025f94431f880e635eca1a96bfde6b.jpg"><br>
+James explaining the challenge.</p>
+<p><img src="/raspbuggy/images/2015-06-17-maze-93960ecd6bba118e326b6efc684cbd2a.jpg"><br>
+A maze to be navigated.</p>
+<p><img src="/raspbuggy/images/2015-06-17-raspbuggy-12066ca0976b5aae96680615f85d1c8a.jpg"><br>
+Some hard logic at play...</p>
+<p><img src="/raspbuggy/images/2015-06-17-trials-84338aac0caae942af48803d6ee690ed.jpg"><br>
+The NXT Raspbuggy in action.</p>
+<p><img src="/raspbuggy/images/2015-06-17-winner-sheet-3ace02b9da49b991aa5aa9715af38a1e.jpg"> <br>
+Our winning entry !</p>
+<p><img src="/raspbuggy/images/2015-06-17-final-shot-ef0f573b6189852af3aaa0d548049e54.jpg"></p>
+<p>Thanks to everyone for your participation in the challenge, and we hope to see you again at the CERN Webfest end of July !</p>
+]]></content></entry><entry><title type="html"><![CDATA[Integration tests with Lego Mindstorms NXT]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/06/02/integration-tests-with-lego-mindstorms-nxt/"/><updated>2015-06-11T13:55:21+02:00</updated><id>/blog/2015/06/02/integration-tests-with-lego-mindstorms-nxt/</id><content type="html"><![CDATA[<p>Successful integration tests... but we do need an ABORT SCRIPT button !</p>
 <!--more-->
 <p>A quick session at the CERN Robotics club to test the full environment and
 demonstrate what we have so far revealed a few minor bugs in the Javascript,
@@ -6,7 +35,7 @@ the fact that the NXT Light sensor API does not seem to work as expected (to
 be investigated), and the need to have an ABORT SCRIPT feature for all
 those infinite loops and errors in waiting times....</p>
 <p>But overall, we are ready for the 17th June programming challenge at CERN Ideasquare !</p>
-]]></content></entry><entry><title type="html"><![CDATA[A fully working programming environment for Lego Mindstorms NXT]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/05/31/a-fully-working-programming-environment-for-lego-mindstorms-nxt/"/><updated>2015-06-04T16:32:21+02:00</updated><id>/blog/2015/05/31/a-fully-working-programming-environment-for-lego-mindstorms-nxt/</id><content type="html"><![CDATA[<p>Finally, the programming environment is fully working for Lego Mindstorms NXT !
+]]></content></entry><entry><title type="html"><![CDATA[A fully working programming environment for Lego Mindstorms NXT]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/05/31/a-fully-working-programming-environment-for-lego-mindstorms-nxt/"/><updated>2015-06-11T13:55:21+02:00</updated><id>/blog/2015/05/31/a-fully-working-programming-environment-for-lego-mindstorms-nxt/</id><content type="html"><![CDATA[<p>Finally, the programming environment is fully working for Lego Mindstorms NXT !
 <img src="/raspbuggy/images/2015-05-31-webide-7cbd246be344a024612a8f410796bb46.jpg"></p>
 <!--more-->
 <p>The web-based programming environment supports :</p>
@@ -20,7 +49,7 @@ those infinite loops and errors in waiting times....</p>
 <p>The generated script will currently only work for the Drivar Lego Mindstorms NXT layer, but it will be
 very easily adapted to work with the Pimoroni Explorer HAT, or even a custom adapter board if we happen to come up with one.</p>
 <p><img src="/raspbuggy/images/2015-05-31-webide-1-20b30a3e4f554537bd05e503e98927ba.jpg"></p>
-]]></content></entry><entry><title type="html"><![CDATA[Powering issues]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/05/01/powering-issues/"/><updated>2015-06-04T14:59:01+02:00</updated><id>/blog/2015/05/01/powering-issues/</id><content type="html"><![CDATA[<p>With all the existing options on the market to control DC motors, collect inputs,
+]]></content></entry><entry><title type="html"><![CDATA[Powering issues]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/05/01/powering-issues/"/><updated>2015-05-16T13:27:12+02:00</updated><id>/blog/2015/05/01/powering-issues/</id><content type="html"><![CDATA[<p>With all the existing options on the market to control DC motors, collect inputs,
 drive outputs, power the whole thing in a standard 5 volts, you would think to controlling a 4WD model car chassis is a no-brainer.
 Well, I must be missing something.</p>
 <!--more-->
@@ -45,7 +74,7 @@ But we would lose a lot of precision in the movement, as well as the capacity to
 </ul>
 <p>... would be enough to drive the four motors, collect input from two ultrasonic sensors and power a small LED array or an LCD screen.</p>
 <p>Any takers ?</p>
-]]></content></entry><entry><title type="html"><![CDATA[A Lego Mindstorm hardware layer]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/18/a-lego-mindstorm-hardware-layer/"/><updated>2015-06-04T14:59:01+02:00</updated><id>/blog/2015/04/18/a-lego-mindstorm-hardware-layer/</id><content type="html"><![CDATA[<p>The Raspbuggy platform is destined to be an open educational programming platform. It is designed to adapt to a
+]]></content></entry><entry><title type="html"><![CDATA[A Lego Mindstorm hardware layer]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/18/a-lego-mindstorm-hardware-layer/"/><updated>2015-05-16T13:27:12+02:00</updated><id>/blog/2015/04/18/a-lego-mindstorm-hardware-layer/</id><content type="html"><![CDATA[<p>The Raspbuggy platform is destined to be an open educational programming platform. It is designed to adapt to a
 large array of hardware layers, so that it can evolve through time.</p>
 <p>In order to cope with different hardware platforms, it relies on a hardware abstraction layer called "Drivar".</p>
 <!--more-->
@@ -60,7 +89,7 @@ large array of hardware layers, so that it can evolve through time.</p>
 <p>In order to organise our next Robotics challenge and introduce the Raspbuggy platform at CERN, we will use four NXT kits
 that will provide an ideal development target for our contestants.</p>
 <p>Stay tuned...</p>
-]]></content></entry><entry><title type="html"><![CDATA[We're online]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/02/we-re-online/"/><updated>2015-06-04T14:59:01+02:00</updated><id>/blog/2015/04/02/we-re-online/</id><content type="html"><![CDATA[<p>We are online, using a Grain-powered website, a Twitter feed, an RSS feed and a new logo !</p>
+]]></content></entry><entry><title type="html"><![CDATA[We're online]]></title><link href="http://cmcrobotics.github.io/raspbuggy/blog/2015/04/02/we-re-online/"/><updated>2015-04-20T00:13:52+02:00</updated><id>/blog/2015/04/02/we-re-online/</id><content type="html"><![CDATA[<p>We are online, using a Grain-powered website, a Twitter feed, an RSS feed and a new logo !</p>
 <!--more-->
 <p>...  But still in the pipeline are  :</p>
 <ul>
