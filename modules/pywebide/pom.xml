@@ -72,6 +72,54 @@
           </execution>
         </executions>
       </plugin>
+      
+          <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.5</version>
+                <!--executions>
+                     <execution>
+                       <id>build-image</id>
+                       <phase>compile</phase>
+                       <goals> <goal>build</goal> </goals>
+                     </execution>
+                     <execution>
+                      <id>push-image</id>
+                      <phase>deploy</phase>
+                      <goals>
+                        <goal>push</goal>
+                      </goals>
+                      <configuration>
+                        <imageName>cmcrobotics/raspbuggy-pywebide</imageName>
+                      </configuration>
+                    </execution>    
+                </executions-->
+                <configuration>
+                    <imageName>cmcrobotics/raspbuggy-pywebide</imageName>
+                    <baseImage>hypriot/rpi-java</baseImage>
+                    <forceTags>true</forceTags>
+                    <imageTags>
+                       <imageTag>${project.version}</imageTag>
+                    </imageTags>
+                    <workdir>/opt/raspbuggy/pywebide</workdir>
+                    <!--cmd>["bin/c2mon.sh","run"]</cmd-->
+                    <exposes>
+                      <expose>8080</expose>
+                    </exposes>
+                    <runs>
+                      <run>chmod 755 /opt/raspbuggy/pywebide/run_pi.sh</run>
+                    </runs>
+                    <volumes>
+                      <volume>/opt/raspbuggy/pywebide/log</volume>
+                    </volumes>
+                    <resources>
+                       <resource>
+                         <directory>${project.build.directory}/c2mon-${project.version}/c2mon-server</directory>
+                         <targetPath>/opt/c2mon/server</targetPath>
+                       </resource>
+                    </resources>
+                </configuration>
+              </plugin>      
     </plugins>
   </build>
 

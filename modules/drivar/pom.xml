@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.raspbuggy</groupId>
-    <artifactId>pywebide</artifactId>
+    <artifactId>drivar</artifactId>
     <version>0.1-SNAPSHOT</version>
     <name>Raspbuggy - Drivar hardware abstraction layer</name>
     <packaging>jar</packaging>
@@ -24,6 +24,7 @@
                             <execution>
                                     <goals>
                                             <goal>package</goal>
+                                            <goal>install</goal>
                                     </goals>
                             </execution>
                     </executions>
