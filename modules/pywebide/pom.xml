@@ -96,7 +96,8 @@
                 </executions-->
                 <configuration>
                     <imageName>cmcrobotics/raspbuggy-pywebide</imageName>
-                    <baseImage>hypriot/rpi-python</baseImage>
+                    <!-- hypriot/rpi-python -->
+                    <baseImage>python:2.7</baseImage>
                     <forceTags>true</forceTags>
                     <imageTags>
                        <imageTag>${project.version}</imageTag>
@@ -107,16 +108,29 @@
                       <expose>8080</expose>
                     </exposes>
                     <runs>
+                      <run>easy_install cherrypy</run>
                       <run>mkdir -p /opt/raspbuggy/pywebide/bin</run>
-                      <run>chmod 755 /opt/raspbuggy/pywebide/bin/run_pi.sh</run>
+                      <run>chmod 755 /opt/raspbuggy/pywebide/bin/webide_run.sh</run>
                     </runs>
                     <volumes>
                       <volume>/opt/raspbuggy/pywebide/log</volume>
                     </volumes>
                     <resources>
                        <resource>
-                         <directory>${project.build.directory}/webjars/META-INF/resources/webjars/</directory>
-                         <targetPath>/opt/raspbuggy/pywebide/webjars</targetPath>
+                         <directory>src/main/python/raspbuggy/webide</directory>
+                         <targetPath>/opt/raspbuggy/pywebide/webide</targetPath>
+                       </resource>
+                       <resource>
+                         <directory>${project.build.directory}/webjars/META-INF/resources/webjars/blockly/b35c0fbfa2</directory>
+                         <targetPath>/opt/raspbuggy/pywebide/webjars/blockly</targetPath>
+                       </resource>
+                       <resource>
+                         <directory>${project.build.directory}/webjars/META-INF/resources/webjars/bootstrap/3.3.4</directory>
+                         <targetPath>/opt/raspbuggy/pywebide/webjars/bootstrap</targetPath>
+                       </resource>
+                       <resource>
+                         <directory>${project.build.directory}/webjars/META-INF/resources/webjars/jquery/1.9.1</directory>
+                         <targetPath>/opt/raspbuggy/pywebide/webjars/jquery</targetPath>
                        </resource>
                        <resource>
                          <directory>${project.build.directory}/classes/bin</directory>
