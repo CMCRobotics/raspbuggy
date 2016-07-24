@@ -10,6 +10,7 @@ The release is currently done via setup.py and pypi like so :
 
 ```
 mvn clean package
-python target/py/setup.py register -r pypi
+cd target/py/setup.py
+python sdist bdist_egg upload -r pypi
 ```
 
