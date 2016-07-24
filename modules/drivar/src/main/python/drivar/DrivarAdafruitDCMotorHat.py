@@ -10,7 +10,7 @@ from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor
 import atexit
 import time
 
-class (DrivarAdafruitDCMotorHat):
+class DrivarAdafruitDCMotorHat(Drivar):
     
     def __init__(self):
         self.m_initialized = False
