@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.raspbuggy</groupId>
     <artifactId>drivar</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <name>Raspbuggy - Drivar hardware abstraction layer</name>
     <packaging>jar</packaging>
 	
@@ -28,9 +28,6 @@
                                     </goals>
                             </execution>
                     </executions>
-                    <!--configuration>
-                      <version>${project.version}</version>
-                    </configuration-->
             </plugin>
     </plugins>
   </build>
