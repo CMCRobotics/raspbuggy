@@ -96,7 +96,7 @@
                 </executions-->
                 <configuration>
                     <imageName>cmcrobotics/raspbuggy-pywebide</imageName>
-                    <baseImage>hypriot/rpi-java</baseImage>
+                    <baseImage>hypriot/rpi-python</baseImage>
                     <forceTags>true</forceTags>
                     <imageTags>
                        <imageTag>${project.version}</imageTag>
