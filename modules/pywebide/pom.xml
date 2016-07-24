@@ -102,20 +102,25 @@
                        <imageTag>${project.version}</imageTag>
                     </imageTags>
                     <workdir>/opt/raspbuggy/pywebide</workdir>
-                    <!--cmd>["bin/c2mon.sh","run"]</cmd-->
+                    <!--cmd>["bin/run_pi.sh","run"]</cmd-->
                     <exposes>
                       <expose>8080</expose>
                     </exposes>
                     <runs>
-                      <run>chmod 755 /opt/raspbuggy/pywebide/run_pi.sh</run>
+                      <run>mkdir -p /opt/raspbuggy/pywebide/bin</run>
+                      <run>chmod 755 /opt/raspbuggy/pywebide/bin/run_pi.sh</run>
                     </runs>
                     <volumes>
                       <volume>/opt/raspbuggy/pywebide/log</volume>
                     </volumes>
                     <resources>
                        <resource>
-                         <directory>${project.build.directory}/c2mon-${project.version}/c2mon-server</directory>
-                         <targetPath>/opt/c2mon/server</targetPath>
+                         <directory>${project.build.directory}/webjars/META-INF/resources/webjars/</directory>
+                         <targetPath>/opt/raspbuggy/pywebide/webjars</targetPath>
+                       </resource>
+                       <resource>
+                         <directory>${project.build.directory}/classes/bin</directory>
+                         <targetPath>/opt/raspbuggy/pywebide/bin</targetPath>
                        </resource>
                     </resources>
                 </configuration>
