@@ -96,8 +96,8 @@
                 </executions-->
                 <configuration>
                     <imageName>cmcrobotics/raspbuggy-pywebide</imageName>
-                    <!-- hypriot/rpi-python -->
-                    <baseImage>python:2.7</baseImage>
+                    <!-- python:2.7 hypriot/rpi-python -->
+                    <baseImage>hypriot/rpi-python</baseImage>
                     <forceTags>true</forceTags>
                     <imageTags>
                        <imageTag>${project.version}</imageTag>
@@ -108,8 +108,8 @@
                       <expose>8080</expose>
                     </exposes>
                     <runs>
+                      <run>apt-get update && apt-get install -y usbutils wget && rm -rf /var/lib/apt/lists/*</run>
                       <run>easy_install cherrypy</run>
-                      <run>mkdir -p /opt/raspbuggy/pywebide/bin</run>
                       <run>chmod 755 /opt/raspbuggy/pywebide/bin/webide_run.sh</run>
                     </runs>
                     <volumes>
