@@ -1,1 +1,2 @@
-PYTHONPATH=src/main/python:../drivar/src/main/python python src/main/python/raspbuggy/webide/main.py
+docker run --name=pywebide -ti --rm --net=host --privileged cmcrobotics/raspbuggy-pywebide /bin/bash
+

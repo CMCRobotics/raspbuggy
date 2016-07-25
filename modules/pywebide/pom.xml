@@ -77,7 +77,7 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.5</version>
-                <!--executions>
+                <executions>
                      <execution>
                        <id>build-image</id>
                        <phase>compile</phase>
@@ -93,7 +93,7 @@
                         <imageName>cmcrobotics/raspbuggy-pywebide</imageName>
                       </configuration>
                     </execution>    
-                </executions-->
+                </executions>
                 <configuration>
                     <imageName>cmcrobotics/raspbuggy-pywebide</imageName>
                     <!-- python:2.7 hypriot/rpi-python -->
