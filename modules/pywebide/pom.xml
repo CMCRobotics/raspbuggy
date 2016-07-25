@@ -108,7 +108,7 @@
                       <expose>8080</expose>
                     </exposes>
                     <runs>
-                      <run>apt-get update && apt-get install -y usbutils wget && rm -rf /var/lib/apt/lists/*</run>
+                      <run><![CDATA[ apt-get update && apt-get install -y usbutils wget && rm -rf /var/lib/apt/lists/* ]]></run>
                       <run>easy_install cherrypy</run>
                       <run>chmod 755 /opt/raspbuggy/pywebide/bin/webide_run.sh</run>
                     </runs>
