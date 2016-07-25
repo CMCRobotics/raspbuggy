@@ -103,13 +103,14 @@
                        <imageTag>${project.version}</imageTag>
                     </imageTags>
                     <workdir>/opt/raspbuggy/pywebide</workdir>
-                    <!--cmd>["bin/run_pi.sh","run"]</cmd-->
+                    <cmd>["bin/webide_run.sh"]</cmd>
                     <exposes>
                       <expose>8080</expose>
                     </exposes>
                     <runs>
-                      <run><![CDATA[ apt-get update && apt-get install -y usbutils wget && rm -rf /var/lib/apt/lists/* ]]></run>
-                      <run>easy_install cherrypy</run>
+                      <run><![CDATA[ apt-get update && apt-get install -y usbutils wget gcc ]]></run>
+                      <run>easy_install ez-setup pyusb cherrypy drivar</run>
+                      <run><![CDATA[ apt-get remove -y gcc && rm -rf /var/lib/apt/lists/* ]]></run>
                       <run>chmod 755 /opt/raspbuggy/pywebide/bin/webide_run.sh</run>
                     </runs>
                     <volumes>
