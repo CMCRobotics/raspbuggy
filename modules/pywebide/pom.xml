@@ -117,7 +117,11 @@
                     </volumes>
                     <resources>
                        <resource>
-                         <directory>src/main/python/raspbuggy/webide</directory>
+                         <directory>${project.basedir}/src/main/webapp</directory>
+                         <targetPath>/opt/raspbuggy/pywebide/webapp</targetPath>
+                       </resource>
+                       <resource>
+                         <directory>${project.basedir}/src/main/python/raspbuggy/webide</directory>
                          <targetPath>/opt/raspbuggy/pywebide/webide</targetPath>
                        </resource>
                        <resource>

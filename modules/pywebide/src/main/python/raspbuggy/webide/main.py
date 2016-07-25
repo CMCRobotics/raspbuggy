@@ -173,7 +173,7 @@ class RaspbuggyService(object):
 if __name__ == '__main__':
     raspbuggyService = RaspbuggyService()
     try:
-        WEBAPP_ROOT = os.getenv('RASPBUGGY_WEBAPP_ROOT',os.getcwd()+"/webide")
+        WEBAPP_ROOT = os.getenv('RASPBUGGY_WEBAPP_ROOT',os.getcwd()+"/webapp")
         BLOCKLY_ROOT = os.getenv('BLOCKLY_ROOT',os.getcwd()+"/webjars/blockly")
         BOOTSTRAP_ROOT = os.getenv('BOOTSTRAP_ROOT',os.getcwd()+"/webjars/bootstrap")
         JQUERY_ROOT = os.getenv('JQUERY_ROOT',os.getcwd()+"/webjars/jquery")
