@@ -5,6 +5,7 @@ Created on Apr 24, 2016
 @author: bcopy
 '''
 
+from drivar.Drivar import Drivar
 from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor
 
 import atexit
