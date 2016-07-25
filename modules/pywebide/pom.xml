@@ -109,8 +109,9 @@
                     </exposes>
                     <runs>
                       <run><![CDATA[ apt-get update && apt-get install -y usbutils wget gcc ]]></run>
-                      <run>easy_install ez-setup pyusb cherrypy drivar</run>
-                      <run><![CDATA[ apt-get remove -y gcc && rm -rf /var/lib/apt/lists/* ]]></run>
+                      <run>easy_install ez_setup</run>
+                      <run>easy_install pyusb cherrypy drivar</run>
+                      <run><![CDATA[ apt-get remove -y gcc && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* ]]></run>
                       <run>chmod 755 /opt/raspbuggy/pywebide/bin/webide_run.sh</run>
                     </runs>
                     <volumes>
