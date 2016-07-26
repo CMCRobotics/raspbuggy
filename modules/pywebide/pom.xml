@@ -80,7 +80,7 @@
                 <executions>
                      <execution>
                        <id>build-image</id>
-                       <phase>compile</phase>
+                       <phase>package</phase>
                        <goals> <goal>build</goal> </goals>
                      </execution>
                      <execution>
@@ -110,7 +110,7 @@
                     <runs>
                       <run><![CDATA[ apt-get update && apt-get install -y usbutils wget gcc ]]></run>
                       <run>easy_install ez_setup</run>
-                      <run>easy_install pyusb cherrypy drivar</run>
+                      <run>easy_install -U pyusb cherrypy drivar</run>
                       <run><![CDATA[ apt-get remove -y gcc && rm -rf /var/lib/apt/lists/* ]]></run>
                       <run>chmod 755 /opt/raspbuggy/pywebide/bin/webide_run.sh</run>
                     </runs>
