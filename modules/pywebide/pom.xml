@@ -99,6 +99,7 @@
                     <!-- python:2.7 hypriot/rpi-python -->
                     <baseImage>hypriot/rpi-python</baseImage>
                     <forceTags>true</forceTags>
+                    <useConfigFile>true</useConfigFile>
                     <imageTags>
                        <imageTag>${project.version}</imageTag>
                     </imageTags>
