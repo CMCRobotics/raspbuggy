@@ -173,10 +173,10 @@ class RaspbuggyService(object):
 if __name__ == '__main__':
     raspbuggyService = RaspbuggyService()
     try:
-        WEBAPP_ROOT = os.getenv('RASPBUGGY_WEBAPP_ROOT',os.getcwd()+"/src/main/webapp/")
-        BLOCKLY_ROOT = os.getenv('BLOCKLY_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/blockly/b35c0fbfa2")
-        BOOTSTRAP_ROOT = os.getenv('BOOTSTRAP_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/bootstrap/3.3.4")
-        JQUERY_ROOT = os.getenv('JQUERY_ROOT',os.getcwd()+"/target/webjars/META-INF/resources/webjars/jquery/1.9.1")
+        WEBAPP_ROOT = os.getenv('RASPBUGGY_WEBAPP_ROOT',os.getcwd()+"/webapp")
+        BLOCKLY_ROOT = os.getenv('BLOCKLY_ROOT',os.getcwd()+"/webjars/blockly")
+        BOOTSTRAP_ROOT = os.getenv('BOOTSTRAP_ROOT',os.getcwd()+"/webjars/bootstrap")
+        JQUERY_ROOT = os.getenv('JQUERY_ROOT',os.getcwd()+"/webjars/jquery")
         cherrypy.server.socket_host = '0.0.0.0'
         accessLogger = logging.getLogger('cherrypy.access')
         accessLogger.setLevel(logging.WARNING)

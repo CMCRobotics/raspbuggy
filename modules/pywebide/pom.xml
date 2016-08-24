@@ -77,10 +77,10 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.5</version>
-                <!--executions>
+                <executions>
                      <execution>
                        <id>build-image</id>
-                       <phase>compile</phase>
+                       <phase>package</phase>
                        <goals> <goal>build</goal> </goals>
                      </execution>
                      <execution>
@@ -93,29 +93,55 @@
                         <imageName>cmcrobotics/raspbuggy-pywebide</imageName>
                       </configuration>
                     </execution>    
-                </executions-->
+                </executions>
                 <configuration>
                     <imageName>cmcrobotics/raspbuggy-pywebide</imageName>
+                    <!-- python:2.7 hypriot/rpi-python -->
                     <baseImage>hypriot/rpi-python</baseImage>
                     <forceTags>true</forceTags>
+                    <useConfigFile>true</useConfigFile>
                     <imageTags>
                        <imageTag>${project.version}</imageTag>
                     </imageTags>
                     <workdir>/opt/raspbuggy/pywebide</workdir>
-                    <!--cmd>["bin/c2mon.sh","run"]</cmd-->
+                    <cmd>["bin/webide_run.sh"]</cmd>
                     <exposes>
                       <expose>8080</expose>
                     </exposes>
                     <runs>
-                      <run>chmod 755 /opt/raspbuggy/pywebide/run_pi.sh</run>
+                      <run><![CDATA[ apt-get update && apt-get install -y usbutils wget gcc ]]></run>
+                      <run>easy_install ez_setup</run>
+                      <run>easy_install -U pyusb cherrypy drivar</run>
+                      <run><![CDATA[ apt-get remove -y gcc && rm -rf /var/lib/apt/lists/* ]]></run>
+                      <run>chmod 755 /opt/raspbuggy/pywebide/bin/webide_run.sh</run>
                     </runs>
                     <volumes>
                       <volume>/opt/raspbuggy/pywebide/log</volume>
                     </volumes>
                     <resources>
                        <resource>
-                         <directory>${project.build.directory}/c2mon-${project.version}/c2mon-server</directory>
-                         <targetPath>/opt/c2mon/server</targetPath>
+                         <directory>${project.basedir}/src/main/webapp</directory>
+                         <targetPath>/opt/raspbuggy/pywebide/webapp</targetPath>
+                       </resource>
+                       <resource>
+                         <directory>${project.basedir}/src/main/python/raspbuggy/webide</directory>
+                         <targetPath>/opt/raspbuggy/pywebide/webide</targetPath>
+                       </resource>
+                       <resource>
+                         <directory>${project.build.directory}/webjars/META-INF/resources/webjars/blockly/b35c0fbfa2</directory>
+                         <targetPath>/opt/raspbuggy/pywebide/webjars/blockly</targetPath>
+                       </resource>
+                       <resource>
+                         <directory>${project.build.directory}/webjars/META-INF/resources/webjars/bootstrap/3.3.4</directory>
+                         <targetPath>/opt/raspbuggy/pywebide/webjars/bootstrap</targetPath>
+                       </resource>
+                       <resource>
+                         <directory>${project.build.directory}/webjars/META-INF/resources/webjars/jquery/1.9.1</directory>
+                         <targetPath>/opt/raspbuggy/pywebide/webjars/jquery</targetPath>
+                       </resource>
+                       <resource>
+                         <directory>${project.build.directory}/classes/bin</directory>
+                         <targetPath>/opt/raspbuggy/pywebide/bin</targetPath>
                        </resource>
                     </resources>
                 </configuration>

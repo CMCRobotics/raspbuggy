@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.raspbuggy</groupId>
     <artifactId>drivar</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
     <name>Raspbuggy - Drivar hardware abstraction layer</name>
     <packaging>jar</packaging>
 	

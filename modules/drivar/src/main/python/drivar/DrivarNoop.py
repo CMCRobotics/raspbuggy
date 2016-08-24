@@ -5,7 +5,7 @@ Created on Jun 01, 2015
 @author: bcopy
 '''
 
-from Drivar import Drivar
+from drivar.Drivar import Drivar
 import time
 import logging
 
