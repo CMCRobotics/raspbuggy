@@ -12,6 +12,7 @@ Blockly.Python['mov_turn'] = function(block) {
   return code;
 };
 
+/*
 Blockly.Python['mov_rotate'] = function(block) {
   var dropdown_wheels = block.getFieldValue('wheels');
   var dropdown_direction = block.getFieldValue('direction');
@@ -19,6 +20,7 @@ Blockly.Python['mov_rotate'] = function(block) {
   var code = 'drivar.rotateWheels(wheelSet=Drivar.WHEELS_'+dropdown_wheels+',direction=Drivar.DIR_'+dropdown_direction+',speedLevel=Drivar.SPEED_'+dropdown_speed+')\n';
   return code;
 };
+*/
 
 Blockly.Python['mov_stop'] = function(block) {
   var code = 'drivar.stop()\n';
@@ -31,7 +33,7 @@ Blockly.Python['mov_stop'] = function(block) {
 //  return [code, Blockly.Python.ORDER_NONE];
 //};
 //
-//Blockly.Python['vis_shapes'] = function(block) {
+//Blockly.Python['vis_shapes'] = fuonction(block) {
 //  var value_picture_input = Blockly.Python.valueToCode(block, 'picture_input', Blockly.Python.ORDER_ATOMIC);
 //  var dropdown_shape = block.getFieldValue('shape');
 //  var code = '# Call Vision shape comparison function';
@@ -69,10 +71,10 @@ Blockly.Python['time_wait'] = function(block) {
   return code;
 };
 
-Blockly.Python['pen_rotate'] = function(block) {
-  var angle_degrees = block.getFieldValue('degrees');
-  var code = 'drivar.rotatePen(angle=int(\''+angle_degrees+'\'))\n';
-  return code;
-};
+//Blockly.Python['pen_rotate'] = function(block) {
+//  var angle_degrees = block.getFieldValue('degrees');
+//  var code = 'drivar.rotatePen(angle=int(\''+angle_degrees+'\'))\n';
+//  return code;
+//};
 
 

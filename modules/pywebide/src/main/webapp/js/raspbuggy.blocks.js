@@ -3,7 +3,7 @@ Blockly.Blocks['mov_move'] = {
     this.setColour(20);
     this.appendDummyInput()
         .appendField("Move")
-        .appendField(new Blockly.FieldDropdown([["Forward", "FORWARD"], ["Backwards", "BACKWARD"]]), "direction")
+        .appendField(new Blockly.FieldDropdown([["Forward", "FORWARD"], ["Backwards", "BACKWARD"], ["Portside", "PORTSIDE"], ["Starboard", "STARBOARD"]]), "direction")
         .appendField("for")
         .appendField(new Blockly.FieldTextInput("500"), "duration")
         .appendField("milliseconds.");
@@ -27,6 +27,7 @@ Blockly.Blocks['mov_turn'] = {
   }
 };
 
+/*
 Blockly.Blocks['mov_rotate'] = {
   init: function() {
     this.setColour(20);
@@ -41,7 +42,7 @@ Blockly.Blocks['mov_rotate'] = {
     this.setTooltip('');
   }
 };
-
+*/
 Blockly.Blocks['mov_stop'] = {
   init: function() {
     this.setColour(20);
@@ -53,6 +54,7 @@ Blockly.Blocks['mov_stop'] = {
   }
 };
 
+/*
 Blockly.Blocks['vis_acquire'] = {
   init: function() {
     this.setColour(330);
@@ -95,6 +97,7 @@ Blockly.Blocks['vis_filter'] = {
     this.setTooltip('');
   }
 };
+*/
 
 Blockly.Blocks['sen_obstacle_distance'] = {
   init: function() {
@@ -143,16 +146,16 @@ Blockly.Blocks['time_wait'] = {
   }
 };
 
-Blockly.Blocks['pen_rotate'] = {
-  init: function() {
-    this.setColour(60);
-    this.appendDummyInput()
-        .appendField("Rotate the pen by ")
-        .appendField(new Blockly.FieldDropdown([["-90", "-90"], ["-45", "-45"], ["-15", "-15"], ["+15", "15"], ["+45", "45"], ["+90", "90"]]), "degrees")
-        .appendField(" degrees.");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('');
-  }
-};
+//Blockly.Blocks['pen_rotate'] = {
+//  init: function() {
+//    this.setColour(60);
+//    this.appendDummyInput()
+//        .appendField("Rotate the pen by ")
+//        .appendField(new Blockly.FieldDropdown([["-90", "-90"], ["-45", "-45"], ["-15", "-15"], ["+15", "15"], ["+45", "45"], ["+90", "90"]]), "degrees")
+//        .appendField(" degrees.");
+//    this.setPreviousStatement(true);
+//    this.setNextStatement(true);
+//    this.setTooltip('');
+//  }
+//};
 
