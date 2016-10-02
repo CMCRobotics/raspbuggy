@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.raspbuggy</groupId>
     <artifactId>pywebide</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>gianopi.0.2</version>
     <name>Raspbuggy programming server</name>
     <packaging>jar</packaging>
 	
@@ -95,14 +95,15 @@
                     </execution>    
                 </executions>
                 <configuration>
+                    <baseImage>hypriot/rpi-python</baseImage>
                     <imageName>cmcrobotics/raspbuggy-pywebide</imageName>
                     <!-- python:2.7 hypriot/rpi-python -->
-                    <baseImage>hypriot/rpi-python</baseImage>
                     <forceTags>true</forceTags>
                     <useConfigFile>true</useConfigFile>
                     <imageTags>
                        <imageTag>${project.version}</imageTag>
                     </imageTags>
+                    <serverId>docker.io</serverId>
                     <workdir>/opt/raspbuggy/pywebide</workdir>
                     <cmd>["bin/webide_run.sh"]</cmd>
                     <exposes>
