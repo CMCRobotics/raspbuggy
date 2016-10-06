@@ -96,7 +96,7 @@
                 </executions>
                 <configuration>
                     <baseImage>hypriot/rpi-python</baseImage>
-                    <imageName>cmcrobotics/raspbuggy-pywebide</imageName>
+                    <imageName>cmcrobotics/gianopi-ide</imageName>
                     <!-- python:2.7 hypriot/rpi-python -->
                     <forceTags>true</forceTags>
                     <useConfigFile>true</useConfigFile>
@@ -113,7 +113,7 @@
                       <run><![CDATA[ apt-get update && apt-get install -y --no-install-recommends usbutils wget gcc python python-dev python-pip python-virtualenv i2c-tools python-smbus]]></run>
                       <run>easy_install ez_setup</run>
                       <run>easy_install pyusb cherrypy gpiozero RPi.GPIO</run>
-                      <run>easy_install -U drivar</run>
+                      <run>easy_install drivar</run>
                       <run><![CDATA[apt-get remove -y gcc && rm -rf /var/lib/apt/lists/* ]]></run>
                       <run>chmod 755 /opt/raspbuggy/pywebide/bin/webide_run.sh</run>
                     </runs>
